@@ -1,0 +1,667 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<!-- The following is required by Aurora Information Systems, DO NOT MODIFY OR REMOVE -->
+   <!-- FIELDFILT.ASP, Version 2.3.0  -->
+<!-- End of Aurora Information Systems Required Text -->
+
+<!-- The following is required by Aurora Information Systems, DO NOT MODIFY OR REMOVE -->
+   <!-- NAUSERDATA.ASP, Version 2.3.2  -->
+<!-- End of Aurora Information Systems Required Text --> 
+
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		
+		<title>Dining Menus &#124; UCLA Dining Services</title>
+		
+		<!-- <script type="application/javascript" src="http://m.ucla.edu/assets/redirect/js.php?m=http://m.dining.ucla.edu/menu/index.cfm?restaurantType=Residential"></script> -->
+		
+		<link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+		
+		<link rel="stylesheet" type="text/css" href="css/global.css?date=2016-10-28" />
+		<link rel="stylesheet" type="text/css" href="css/menu.css" />
+		
+		<script type="text/javascript" src="/lib/jquery/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="/lib/tooltip/jquery.tools.min.js"></script>
+		<script type="text/javascript" src="/lib/sticky/jquery.sticky.js"></script>
+		
+		<script type="text/javascript" src="js/global.js?date=2016-10-28"></script>
+		<script type="text/javascript" src="js/controls.js"></script>
+		<script type="text/javascript" src="js/menu.js"></script>
+		<script type="text/javascript" src="js/recipebox.js"></script>
+		<script type="text/javascript" src="js/tooltip.js"></script>
+		
+		<script language="javascript">
+		
+			
+			recipeInfo["140323"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["140794"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["145247"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["165084"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["142037"] = "Fluffy scrambled eggs served with hearty grains of farro and a a smoky ragu made with ground turkey, flageolet beans and roasted tomatoes. ";
+			recipeInfo["031035"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["015219"] = "Toasted English muffin layered with roasted mushrooms and sautéed kale. Topped with a poached egg and dollop of arugula pesto. .\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["161046"] = "Tender chunks of red potatoes and yellow onions coated in extra virgin olive oil and grilled until crispy.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["061101"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["061102"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["217072"] = "A golden, crisp waffle made of toasted oats and whole wheat flour. Served with a sweet acai-blackberry and chia seed topping.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["999025"] = "Fried Egg and microgreens served over a patty made with red quinoa, potatoes and parmesan cheese.";
+			recipeInfo["081107"] = "Tender pork loin served alongside enoki mushrooms and fresh mitzuna over buckwheat soba noodles in a flavorful roasted vegetable broth.";
+			recipeInfo["140593"] = "Grilled sesame-ginger tofu served over sautéed cabbage, and colorful volcano rice.  Drizzled with sesame-ginger dressing.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["041187"] = "Rosemary chicken breast, hardboiled egg, avocado, lettuce, tomato and cucumber wrapped in a warm wheat tortilla with mayo and Dijon mustard. ";
+			recipeInfo["140757"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["141181"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["112208"] = "Free-range chicken breasts marinated and seasoned with an herb blend  of basil, fennel seed, lavendar, marjoram and sage.";
+			recipeInfo["140509"] = "Roasted Portobello mushroom-potato-farro patty topped with fresh Roma tomatoes and baby arugula dressed in lemony tarragon vinaigrette.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["112193"] = "Brown jasmine rice topped with charbroiled chipotle chicken breast and avocado. Drizzled with creamy lime-cilantro dressing.";
+			recipeInfo["140640"] = "Nopales cactus, roasted potatoes and kale sautéed with Guajillo chilies served with brown rice, red beans and roasted corn-tomato salsa. \n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["140674"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/LC.png\" alt=\"Low-Carbon Foodprint\" />&nbsp;Low-Carbon Foodprint</div>\n";
+			recipeInfo["141067"] = "Organic whole wheat pizza crust brushed with garlic-herb spread, topped with fresh organic mozzarella cheese, organic hothouse tomatoes and fresh organic basil.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["081108"] = "Boneless pork loin marinated in an olive oil blend flavored with fresh lime and orange juices, cumin, fresh oregano and cilantro.";
+			recipeInfo["175235"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["175103"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["061005"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["061035"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["161011"] = "Potato hash browns, grilled until golden brown. \n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["111187"] = "Juicy roast chicken sausage with sweet apples.";
+			recipeInfo["061034"] = "Fluffy cage-free scrambled eggs.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["061001"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["217033"] = "Belgian waffle cooked until crispy and golden-brown. \n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["161012"] = "Crispy bite-sized potatoes, fried until golden-brown. \n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["140388"] = "Deep fried tortilla mixed in a piquant roasted tomato sauce with onions. Baked with Cheddar and Jack cheeses.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["111125"] = "Sautéed garlic, parsley, white wine-marinated chicken breast, and spinach, tossed with cheese tortellini. Drizzled with lemon juice.";
+			recipeInfo["140359"] = "Cheese tortellini tossed with alfredo sauce, red roasted pepper strips, and fresh basil.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["121035"] = "Beer-battered pollock filets deep-fried and served with steak-cut fries.";
+			recipeInfo["140498"] = "Vegan beef strips in a Kansas-City style BBQ sauce. Served warm on a toasted onion bun, topped with coleslaw.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["400648"] = "Fresh tomatoes and medley of mozzarella, fontina, and parmesan cheese, baked on our house-made dough.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["113053"] = "Juicy turkey patty, bacon, caramelized onions, guacamole, lettuce, and tomato on  toasted brioche buns spread with mustard mayonnaise.";
+			recipeInfo["138001"] = "Cheddar cheese with sautéed onions and tomato. Grilled until cheese is melted.";
+			recipeInfo["101014"] = "Mexican style braised Lamb Taco.";
+			recipeInfo["140788"] = "Cactus marinated in spices, grilled, then diced. Topped on a warm corn tortilla and garnished with pickled red onion.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["500213"] = "Rosemary, basil, and lemon juice rubbed chicken. Roasted until tender. ";
+			recipeInfo["140108"] = "Tofu crumbles sautéed with onion, garlic and seasoned with turmeric.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["123031"] = "Lemon marinated shrimp over a creamy Alfredo sauce and mozzarella cheese. Garnished with fresh chopped green onion, baked on our signature house-made dough.";
+			recipeInfo["079212"] = "<i>Zhao Pai Chao Fan</i>&nbsp;&#124;&nbsp;China<br />Fluffy steamed rice stir-fried with a light egg scramble, chicken, beef, tiger shrimp, and a sprinkling of fresh chopped scallions.";
+			recipeInfo["146000"] = "<i>Pad Makua Yao</i>&nbsp;&#124;&nbsp;Thailand<br />Firm slices of eggplant stir-fried with minced ginger, shallots, chopped garlic, and a seasoning of fresh chili peppers and kaffir lime leaves. Drizzled with a savory blend of vegan soy sauce, coriander leaves, and basil.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["029033"] = "<i>Tonkotsu Shoyu Ramen</i>&nbsp;&#124;&nbsp;Japan<br />Fresh ramen noodles and tender slices of pork in a flavorful broth of pork and dashi, seasoned with soy sauce. Topped with half an egg, shiitake mushrooms, and fresh scallions.";
+			recipeInfo["061119"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["140693"] = "China\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/LC.png\" alt=\"Low-Carbon Foodprint\" />&nbsp;Low-Carbon Foodprint</div>\n";
+			recipeInfo["973350"] = "<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/LC.png\" alt=\"Low-Carbon Foodprint\" />&nbsp;Low-Carbon Foodprint</div>\n";
+			recipeInfo["146044"] = "<i>Gyaeran Toseuteu</i>&nbsp;&#124;&nbsp;Korea<br />A thick slice of a fluffy Korean omelet mixed with fresh, chopped scallions on crispy, buttered toast spread with sweet onion slices and tangy ketchup.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/V.png\" alt=\"Vegetarian Menu Option\" />&nbsp;Vegetarian Menu Option</div>\n";
+			recipeInfo["111768"] = "<i>Tori Teriyaki Sando</i>&nbsp;&#124;&nbsp;Japan<br />Fresh chicken breast marinated in teriyaki sauce and broiled. Served on a toasted bun with crisp lettuce tossed with sesame oil, aonori seaweed powder, and pickled radish. ";
+			recipeInfo["145034"] = "<i>Dubu Jorim</i>&nbsp;&#124;&nbsp;Korea<br />Fresh, soft tofu cubes seared to a golden-brown and infused with Korean chili pepper sauce.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["079284"] = "Korea<br />Originally prepared and served for the royal family of Korea, this rice cake dish is sumptuously stir-fried with ribeye, shiitake mushrooms, and onion.";
+			recipeInfo["047129"] = "China<br />Crisp baby bok choy, sauteed with a garlic ginger sauce.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["111847"] = "<i>Dori Carre</i>&nbsp;&#124;&nbsp;Japan<br />Tender pieces of chicken simmered in golden curry sauce, with carrot and potato pieces.";
+			recipeInfo["145074"] = "<i>Mea Ulu Royale</i>&nbsp;&#124;&nbsp;Hawaii<br />Silky tofu threads stir-fried with assorted vegetables, crunchy bean sprouts, and diced onions.  Drizzled with teriyaki sauce and served over a bed of steamed white rice.\n<hr class=\"ttspacer\" />\n<div class=\"ttlegend\"><img class=\"webcode\" src=\"images/webcodes/16px/VG.png\" alt=\"Vegan Menu Option\" />&nbsp;Vegan Menu Option</div>\n";
+			recipeInfo["111708"] = "Korea<br />Chicken cooked in a spicy gochujang sauce, grilled, and served in a gwa pao bun.";
+
+		
+		</script>
+		
+		<!-- Google Analytics Code -->
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-32722183-1']);
+			_gaq.push(['_trackPageview', '/foodpro/default.asp?date=12%2F1%2F2016&DaysAhead=-13']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+		<!-- End Google Analytics Code -->
+	</head>
+	
+	<body id="top">
+		<div id="globalwrapper">
+			<div class="hdr sticky-wrapper">
+				
+				<table class="hdrtable"><tbody>
+					<tr>
+						<td class="hdrlogo">
+							<a href="http://www.dining.ucla.edu/"><img src="images/ds_logo_2015.png" /></a>
+						</td>
+						
+					</tr>
+					<tr>
+						<td class="hdrlower">
+							<a href="http://www.dining.ucla.edu/">Home</a>&nbsp;&#124;
+							<a href="https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm">Hours of Operation</a>&nbsp;&#124;
+							<a href="http://housing.ucla.edu/dining-services/overview/facilities-services">Dining Locations</a>&nbsp;&#124;
+							<a href="default.asp">Today's Entr&eacute;es</a>&nbsp;&#124;
+							<div class="ddwrap">
+								<a href="javascript:void(0);" id="ddb1">Quick-Service Restaurants&nbsp;<img alt="Expand" src="images/expand.png" /></a>
+								<div class="ddcontent" id="ddc1">
+									<ul>
+										<li><a href="http://menu.ha.ucla.edu/foodpro/bruincafe.asp">Bruin Caf&eacute;</a></li>
+										<li><a href="http://menu.ha.ucla.edu/foodpro/cafe1919.asp">Caf&eacute; 1919</a></li> 
+										<li><a href="http://menu.ha.ucla.edu/foodpro/rendezvous.asp">Rendezvous</a></li>
+										<li><a href="http://menu.ha.ucla.edu/foodpro/deneveonthego.asp">De Neve Grab 'N Go</a></li>
+										<li><a href="http://menu.ha.ucla.edu/foodpro/bruinplategrabngo.asp">Bruin Plate Grab &amp; Go Breakfast</a></li>
+										<li><a href="http://menu.ha.ucla.edu/foodpro/denevelatenight.asp">De Neve Late Night</a></li>
+										<li><a href="https://shib.hhs.ucla.edu/mypizza/index.cfm"><i>Order MyPizza &amp; Wings</i></a></li>
+									</ul>
+								</div>
+							</div>&nbsp;&#124;
+							<div class="ddwrap">
+								<a href="javascript:void(0);" id="ddb2">Additional Services&nbsp;<img alt="Expand" src="images/expand.png" /></a>&nbsp;
+								<div class="ddcontent" id="ddc2">
+									<ul>
+										<li><a href="http://marketing.hhs.ucla.edu/kosher-halal/"><i>Pre-Order Covel Kosher or Halal Meal</i></a></li>
+										<li><a href="http://housing.ucla.edu/dining-services/services-programs">Services &amp; Programs Overview</a></li>
+										<li><a href="http://housing.ucla.edu/dining-services/nutrition-education">Nutrition Education</a></li> 
+										<li><a href="http://housing.ucla.edu/dining-services/comments-suggestions">Comments &amp; Suggestions</a></li>
+										<li><a href="http://m.dining.ucla.edu/">Mobile Site</a></li>
+									</ul>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody></table>
+
+
+			
+			
+				<div class="midnav sticky-wrapper">
+		
+					<span class="midnavbreadcrumb"><a href="default.asp">Menus</a>&nbsp;&gt;&nbsp;Thursday, December 1, 2016 (Overview)
+</span>
+				
+					
+
+					<div class="midnavcontrols">
+						<form name="searchform" action="search.asp" method="post">
+						
+							<a id="filterlink" href="filter.asp">Configure Menu Filters</a>&nbsp;
+							
+							<!-- The following is required by Aurora Information Systems, DO NOT MODIFY OR REMOVE -->
+								<!-- allergenfilterinc.asp, Version 2.3.3  -->
+							<!-- End of Aurora Information Systems Required Text --> 
+						
+							<select name="dateselect" id="dateselect" onChange="window.location = this.options[this.selectedIndex].value">
+								<option value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F1%2F2016">Jump to Date...</option>
+								
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F13%2F2016">Yesterday, Dec 13</option>
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F14%2F2016">Today, Dec 14</option>
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F15%2F2016">Tomorrow, Dec 15</option>
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F16%2F2016">Friday, Dec 16</option>
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F17%2F2016">Saturday, Dec 17</option>
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F18%2F2016">Sunday, Dec 18</option>
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F19%2F2016">Monday, Dec 19</option>
+								<option Value="http://menu.ha.ucla.edu/foodpro/default.asp?date=12%2F20%2F2016">Tuesday, Dec 20</option>
+
+							</select>
+				
+							<!-- The following is required by Aurora Information Systems, DO NOT MODIFY OR REMOVE -->
+								<!-- date.asp, Version 2.3.0  -->
+							<!-- End of Aurora Information Systems Required Text --> 
+					
+
+							<input class="searchboxblurred" id="searchbox" type="text" name="search" value="Menu Search" onFocus="SearchFocus()" onBlur="SearchBlur()" />
+							<input class="midnavbutton" type="image" src="images/search.png" />
+						</form>
+					</div>
+						
+		
+				
+				</div>
+			</div>
+				
+			<hr class="clearall" />
+		
+			<div id="tooltip">&nbsp;</div>
+			
+			<div id="menuwrapper">
+			
+				<div class="menucontent">
+				<table class="menugridtable" cellspacing="0"><tbody>
+					<tr>
+						<td class="menumealheader" colspan="2">
+							Breakfast Menu for Thursday, December 1, 2016
+							<span class="menudetaillink"><a href="default.asp?date=12%2F1%2F2016&meal=1&threshold=2">Click Here for the Full Breakfast Menu (All Halls) &raquo;</a></span>
+						</td>					</tr>
+					<tr>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=02&date=12%2F1%2F2016">Bruin Plate</a></td>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=01&date=12%2F1%2F2016">De Neve Dining</a></td>
+					</tr>
+					<tr>
+						<td class="menunutritionlink"><a href="default.asp?location=02&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=02&date=12%2F1%2F2016&meal=1">Nutritive Analysis</a></td>
+						<td class="menunutritionlink"><a href="default.asp?location=01&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=01&date=12%2F1%2F2016&meal=1">Nutritive Analysis</a></td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Freshly Bowled</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=142037&PortionSize=4" onmouseover="SetRecDesc('142037');">Tomato Turkey Ragu &amp; Omelet Bowl</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=031035&PortionSize=3" onmouseover="SetRecDesc('031035');">Cream of Wheat Berry w/ Cranberries</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">The Front Burner</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061005&PortionSize=1" onmouseover="SetRecDesc('061005');">Egg White</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061035&PortionSize=1" onmouseover="SetRecDesc('061035');">Omelet Bar</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Harvest</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=015219&PortionSize=3" onmouseover="SetRecDesc('015219');">Egg, Mushroom &amp; Kale on W.W. English Muffin</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=161046&PortionSize=2" onmouseover="SetRecDesc('161046');">Red Potato Hash</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061101&PortionSize=3" onmouseover="SetRecDesc('061101');">Scrambled Egg Whites</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061102&PortionSize=3" onmouseover="SetRecDesc('061102');">Scrambled Eggs</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">The Kitchen</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=089003&PortionSize=2" onmouseover="SetRecDesc('089003');">Bacon</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=161011&PortionSize=2" onmouseover="SetRecDesc('161011');">Breakfast Hash Brown</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=111187&PortionSize=1" onmouseover="SetRecDesc('111187');">Chicken Apple Sausage</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061034&PortionSize=2" onmouseover="SetRecDesc('061034');">Scrambled Eggs</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061001&PortionSize=1" onmouseover="SetRecDesc('061001');">Fried Eggs</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Stone Oven</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=217072&PortionSize=3" onmouseover="SetRecDesc('217072');">Oat &amp; Whole Wheat Waffle</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">The Pizzeria</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=217033&PortionSize=1/2" onmouseover="SetRecDesc('217033');">Belgian Waffle</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Simply Grilled</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=999025&PortionSize=1" onmouseover="SetRecDesc('999025');">Red Quinoa &amp; Potato Cake w/ Fried Egg</a></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">The Grill</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061001&PortionSize=1" onmouseover="SetRecDesc('061001');">Fried Eggs</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=161012&PortionSize=3" onmouseover="SetRecDesc('161012');">Tator Tots</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140388&PortionSize=1" onmouseover="SetRecDesc('140388');">Vegetarian Chilaquiles</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+			</tbody></table>
+			</div>
+<br />
+<div class="divider_menu"></div><div class="menucontent">
+				<table class="menugridtable" cellspacing="0"><tbody>
+					<tr>
+						<td class="menumealheader" colspan="2">
+							Lunch Menu for Thursday, December 1, 2016
+							<span class="menudetaillink"><a href="default.asp?date=12%2F1%2F2016&meal=2&threshold=2">Click Here for the Full Lunch Menu (All Halls) &raquo;</a></span>
+						</td>					</tr>
+					<tr>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=07&date=12%2F1%2F2016">Covel Dining</a></td>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=02&date=12%2F1%2F2016">Bruin Plate</a></td>
+					</tr>
+					<tr>
+						<td class="menunutritionlink"><a href="default.asp?location=07&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="https://housing.ucla.edu/dining-services/overview/dining-services/kosher-halal">Kosher &amp; Halal Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=07&date=12%2F1%2F2016&meal=2">Nutritive Analysis</a></td>
+						<td class="menunutritionlink"><a href="default.asp?location=02&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=02&date=12%2F1%2F2016&meal=2">Nutritive Analysis</a></td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Exhibition Kitchen</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=140394&PortionSize=1" onmouseover="SetRecDesc('140394');">Fettucini w/ Salmon Cream Sauce</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140323&PortionSize=6" onmouseover="SetRecDesc('140323');">Fettuccini w Shiitake Mushroom</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Freshly Bowled</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=081107&PortionSize=5" onmouseover="SetRecDesc('081107');">Pork w/ Buckwheat Noodle in Roasted Vegetable Broth</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140593&PortionSize=5" onmouseover="SetRecDesc('140593');">Sesame Tofu, Volcano Rice, &amp; Mixed Cabbage Bowl</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Euro Kitchen</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=112212&PortionSize=1" onmouseover="SetRecDesc('112212');">Pomegranate Chicken Wrap</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140794&PortionSize=3" onmouseover="SetRecDesc('140794');">Zucchini Mucver</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Harvest</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=041187&PortionSize=5" onmouseover="SetRecDesc('041187');">California Cobb Salad Wrap</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140757&PortionSize=5" onmouseover="SetRecDesc('140757');">Chipotle Seitan Taco</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Pizza Oven</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=145247&PortionSize=1" onmouseover="SetRecDesc('145247');">Onion, Pepper, &amp; Feta Flatbread</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Stone Oven</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=141181&PortionSize=1" onmouseover="SetRecDesc('141181');">Broccolini, Swiss Chard, Mozzarella Flatbread</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=141184&PortionSize=1" onmouseover="SetRecDesc('141184');">Chicken, Arugula, &amp; Radish Flatbread</a></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Grill</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=127146&PortionSize=1" onmouseover="SetRecDesc('127146');">Battered Cod Sandwich</a></li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=087010&PortionSize=1" onmouseover="SetRecDesc('087010');">Prosciutto Caprese Lavash Sandwich</a></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Simply Grilled</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=112208&PortionSize=2" onmouseover="SetRecDesc('112208');">Grilled Chicken - Herbes de Provence</a></li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=123101&PortionSize=3" onmouseover="SetRecDesc('123101');">Shrimp Patty w/ Fajita Vegetables, Avocado Sauce		</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140509&PortionSize=4" onmouseover="SetRecDesc('140509');">Farro-Mushroom Stacker</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=999026&PortionSize=1" onmouseover="SetRecDesc('999026');">Carrot Pancake w/ Citrus Marmalade</a></li>
+							</ul>
+						</td>
+					</tr>
+			</tbody></table>
+				<hr class="menusplit" />
+				<table class="menugridtable" cellspacing="0"><tbody>
+					<tr>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=01&date=12%2F1%2F2016">De Neve Dining</a></td>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=04&date=12%2F1%2F2016">FEAST at Rieber</a></td>
+					</tr>
+					<tr>
+						<td class="menunutritionlink"><a href="default.asp?location=01&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=01&date=12%2F1%2F2016&meal=2">Nutritive Analysis</a></td>
+						<td class="menunutritionlink"><a href="default.asp?location=04&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=04&date=12%2F1%2F2016&meal=2">Nutritive Analysis</a></td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Front Burner</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=111125&PortionSize=5" onmouseover="SetRecDesc('111125');">Tortellini w/ Chicken &amp; Spinach</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140359&PortionSize=5" onmouseover="SetRecDesc('140359');">Tortellini Alfredo w/ Peppers</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Bruin Wok</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=079212&PortionSize=4" onmouseover="SetRecDesc('079212');">House Special Fried Rice</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=146000&PortionSize=4" onmouseover="SetRecDesc('146000');">Eggplant Stir Fry</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Kitchen</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=121035&PortionSize=1" onmouseover="SetRecDesc('121035');">Fish &amp; Chips</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140498&PortionSize=1" onmouseover="SetRecDesc('140498');">Vegetarian BBQ Beef Sandwich</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Spice Kitchen</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=029033&PortionSize=7" onmouseover="SetRecDesc('029033');">Pork Ramen w/ Soy Sauce Broth</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=061119&PortionSize=3" onmouseover="SetRecDesc('061119');">Tea Egg &amp; Bokchoy</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Pizzeria</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=400648&PortionSize=1/10" onmouseover="SetRecDesc('400648');">Three Cheese &amp; Tomato Pizza</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Stone Oven</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140693&PortionSize=1" onmouseover="SetRecDesc('140693');">Green Onion Pancake</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option">&nbsp;<img class="webcode" src="images/webcodes/16px/LC.png" alt="Low-Carbon Foodprint"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=973350&PortionSize=1" onmouseover="SetRecDesc('973350');">Naan Bread</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option">&nbsp;<img class="webcode" src="images/webcodes/16px/LC.png" alt="Low-Carbon Foodprint"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Grill</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=113053&PortionSize=1" onmouseover="SetRecDesc('113053');">Avocado Bacon Turkey Burger</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=138001&PortionSize=1" onmouseover="SetRecDesc('138001');">Grilled Tomato &amp; Onions Sand</a></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Iron Grill</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=974100&PortionSize=1" onmouseover="SetRecDesc('974100');">Chicken &amp; Vegetable Egg Roll</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=146044&PortionSize=1" onmouseover="SetRecDesc('146044');">Korean Egg Snack Sandwich</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=111768&PortionSize=1" onmouseover="SetRecDesc('111768');">Teriyaki Chicken Sandwich</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=145034&PortionSize=1" onmouseover="SetRecDesc('145034');">Seared Tofu w/ Spicy Sauce</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+			</tbody></table>
+			</div>
+<br />
+<div class="divider_menu"></div><div class="menucontent">
+				<table class="menugridtable" cellspacing="0"><tbody>
+					<tr>
+						<td class="menumealheader" colspan="2">
+							Dinner Menu for Thursday, December 1, 2016
+							<span class="menudetaillink"><a href="default.asp?date=12%2F1%2F2016&meal=3&threshold=2">Click Here for the Full Dinner Menu (All Halls) &raquo;</a></span>
+						</td>					</tr>
+					<tr>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=07&date=12%2F1%2F2016">Covel Dining</a></td>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=02&date=12%2F1%2F2016">Bruin Plate</a></td>
+					</tr>
+					<tr>
+						<td class="menunutritionlink"><a href="default.asp?location=07&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="https://housing.ucla.edu/dining-services/overview/dining-services/kosher-halal">Kosher &amp; Halal Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=07&date=12%2F1%2F2016&meal=3">Nutritive Analysis</a></td>
+						<td class="menunutritionlink"><a href="default.asp?location=02&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=02&date=12%2F1%2F2016&meal=3">Nutritive Analysis</a></td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Exhibition Kitchen</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=165128&PortionSize=6" onmouseover="SetRecDesc('165128');">Gemelli Pasta w/ Seafood</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=165084&PortionSize=6" onmouseover="SetRecDesc('165084');">Gemelli Pasta w/ Asparagus &amp; Mushroom</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Freshly Bowled</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=112193&PortionSize=5" onmouseover="SetRecDesc('112193');">Chipotle Chicken, Brown Rice &amp; Avocado Bowl</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140640&PortionSize=5" onmouseover="SetRecDesc('140640');">Potato, Kale, Brown Rice &amp; Red Bean Bowl</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Euro Kitchen</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=111309&PortionSize=3" onmouseover="SetRecDesc('111309');">Chicken Tagine w/ Olives &amp; Preserved Lemons</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140794&PortionSize=3" onmouseover="SetRecDesc('140794');">Zucchini Mucver</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Harvest</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=121060&PortionSize=5" onmouseover="SetRecDesc('121060');">Mahi Mahi w/ Tomatillo Sauce, Red Beans, &amp; Polenta</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140674&PortionSize=5" onmouseover="SetRecDesc('140674');">Chili Tofu Over Quinoa Vegetable Pilaf</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option">&nbsp;<img class="webcode" src="images/webcodes/16px/LC.png" alt="Low-Carbon Foodprint"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Pizza Oven</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=145247&PortionSize=1" onmouseover="SetRecDesc('145247');">Onion, Pepper, &amp; Feta Flatbread</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Stone Oven</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=141067&PortionSize=1" onmouseover="SetRecDesc('141067');">Roasted Tomato Pizza</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option"></li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=141081&PortionSize=1" onmouseover="SetRecDesc('141081');">Turkey Cranberry Flatbread</a></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Grill</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=127146&PortionSize=1" onmouseover="SetRecDesc('127146');">Battered Cod Sandwich</a></li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=087010&PortionSize=1" onmouseover="SetRecDesc('087010');">Prosciutto Caprese Lavash Sandwich</a></li>
+							</ul>
+						</td>
+						<td class="menugridcell_last">
+							<ul>
+								<li class="category5">Simply Grilled</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=081108&PortionSize=2" onmouseover="SetRecDesc('081108');">Mojo-Marinated Grilled Pork Tenderloin</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=175235&PortionSize=3" onmouseover="SetRecDesc('175235');">Grilled Sweet Potato w/ Lemon Chile Dressing</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=175103&PortionSize=3" onmouseover="SetRecDesc('175103');">Pan-Roasted Mushrooms w/ Onions</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+			</tbody></table>
+				<hr class="menusplit" />
+				<table class="menugridtable" cellspacing="0"><tbody>
+					<tr>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=01&date=12%2F1%2F2016">De Neve Dining</a></td>
+						<td class="menulocheader"><a class="menuloclink" href="default.asp?location=04&date=12%2F1%2F2016">FEAST at Rieber</a></td>
+					</tr>
+					<tr>
+						<td class="menunutritionlink"><a href="default.asp?location=01&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=01&date=12%2F1%2F2016&meal=3">Nutritive Analysis</a></td>
+						<td class="menunutritionlink"><a href="default.asp?location=04&date=12%2F1%2F2016">Full Menu</a>&nbsp;&#124;&nbsp;<a href="nutritiveanalysis.asp?location=04&date=12%2F1%2F2016&meal=3">Nutritive Analysis</a></td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Front Burner</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=101014&PortionSize=2" onmouseover="SetRecDesc('101014');">Taco de Barbacoa de Borrego (Braised Lamb Taco)</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140788&PortionSize=2" onmouseover="SetRecDesc('140788');">Tacos De Nopal Asado	</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Bruin Wok</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=079284&PortionSize=4" onmouseover="SetRecDesc('079284');">Royal Ttokbokki</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=047129&PortionSize=3" onmouseover="SetRecDesc('047129');">Sauteed Baby Bokchoy</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Kitchen</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=500213&PortionSize=1" onmouseover="SetRecDesc('500213');">Lemon Rosemary Rotisserie Chicken</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140108&PortionSize=3" onmouseover="SetRecDesc('140108');">Tofu Scramble</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Spice Kitchen</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=111847&PortionSize=4" onmouseover="SetRecDesc('111847');">Chicken Curry</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=145074&PortionSize=3" onmouseover="SetRecDesc('145074');">Vegetable Royale</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Pizzeria</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=123031&PortionSize=1/10&bgcolor=0F0F0F" onmouseover="SetRecDesc('123031');">Shrimp Alfredo Pizza</a></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Stone Oven</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=140693&PortionSize=1" onmouseover="SetRecDesc('140693');">Green Onion Pancake</a>&nbsp;<img class="webcode" src="images/webcodes/16px/V.png" alt="Vegetarian Menu Option">&nbsp;<img class="webcode" src="images/webcodes/16px/LC.png" alt="Low-Carbon Foodprint"></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=973350&PortionSize=1" onmouseover="SetRecDesc('973350');">Naan Bread</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option">&nbsp;<img class="webcode" src="images/webcodes/16px/LC.png" alt="Low-Carbon Foodprint"></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">The Grill</li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=113053&PortionSize=1" onmouseover="SetRecDesc('113053');">Avocado Bacon Turkey Burger</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=138001&PortionSize=1" onmouseover="SetRecDesc('138001');">Grilled Tomato &amp; Onions Sand</a></li>
+							</ul>
+						</td>
+						<td class="menugridcell">
+							<ul>
+								<li class="category5">Iron Grill</li>
+								<li class="level5"><a class="itemlink" href="recipedetail.asp?RecipeNumber=974100&PortionSize=1" onmouseover="SetRecDesc('974100');">Chicken &amp; Vegetable Egg Roll</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=111708&PortionSize=4" onmouseover="SetRecDesc('111708');">Spicy Chicken in Steamed Bun</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=111768&PortionSize=1" onmouseover="SetRecDesc('111768');">Teriyaki Chicken Sandwich</a></li>
+								<li class="level5"><a class="itemlinkt" href="recipedetail.asp?RecipeNumber=145034&PortionSize=1" onmouseover="SetRecDesc('145034');">Seared Tofu w/ Spicy Sauce</a>&nbsp;<img class="webcode" src="images/webcodes/16px/VG.png" alt="Vegan Menu Option"></li>
+							</ul>
+						</td>
+					</tr>
+			</tbody></table>
+			</div>
+<br />
+
+		
+				<p id="back-top"><a href="#top"><span></span>Back to Top</a></p>
+
+				<div class="push"></div>
+			
+			</div> <!-- END #MENUWRAPPER -->
+		
+		</div> <!-- END #GLOBALWRAPPER -->
+		
+		
+			<div id="footer">
+				
+				<div class="legend_info">
+					<h3>Legend</h3>
+					<p>						<img class="webcode" src="images/webcodes/16px/V.png" />&nbsp;&nbsp;Vegetarian Menu Option<br />
+						<img class="webcode" src="images/webcodes/16px/VG.png" />&nbsp;&nbsp;Vegan Menu Option<br />
+						<img class="webcode" src="images/webcodes/16px/LC.png" />&nbsp;&nbsp;Low-Carbon Foodprint
+					</p>
+				</div>
+
+				
+				
+				<div class="copyright_disclaimer">
+					<p>
+						Menus are subject to change based on operational needs.
+					
+						<!-- The following is required by Aurora Information Systems, DO NOT MODIFY OR REMOVE -->
+						<br />
+						Powered by FoodPro<sup>&#174;</sup>&nbsp;
+						<!-- End of Aurora Information Systems Required Text -->
+					</p>
+				</div>
+			</div>
+	</body>
+</html>
+
+
+
+
+
+<!-- The following is required by Aurora Information Systems, DO NOT MODIFY OR REMOVE -->
+   <!-- SHORTMENU.ASP, Version 2.3.3  -->
+<!-- End of Aurora Information Systems Required Text --> 
