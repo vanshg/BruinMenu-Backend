@@ -9,8 +9,8 @@ var fs = require('fs');
 var app = express()
 
 let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'// yyyy-mm-dd
-let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
-let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
+//TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
+// let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
 
 let hallTitlesHours = [
     'Covel',
@@ -28,6 +28,11 @@ app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(express.static('website'))
+// Spin up the server
+app.listen(app.get('port'), function() {
+    console.log('running on port', app.get('port'))
+})
+
 
 /* Parameters:
     Date (optional)
@@ -86,26 +91,21 @@ app.get('/menus', function (req, res) {
     parseMenus(res, html);
 })
 
-app.get('/calendarYear', function(req, res){
-    // TODO: get the calendar years for several 
-    var url = util.format(calendarUrl);
-    request(url, function(error, response, body)
-    {
-        if (error)
-        {
-            sendError(res, error)
-        }
-        else{
-            res.send('TODO')
-        }
-    })
-    res.send('TODO');
-})
-
-// Spin up the server
-app.listen(app.get('port'), function() {
-    console.log('running on port', app.get('port'))
-})
+// app.get('/calendarYear', function(req, res){
+//     // TODO: get the calendar years for several 
+//     var url = util.format(calendarUrl);
+//     request(url, function(error, response, body)
+//     {
+//         if (error)
+//         {
+//             sendError(res, error)
+//         }
+//         else{
+//             res.send('TODO')
+//         }
+//     })
+//     res.send('TODO');
+// })
 
 function parseOverviewPage(res, body) {
     var response = {}
@@ -150,25 +150,6 @@ function parseHours(res, body) {
         } else {
             obj[breakfast_key] = text
         }
-        // if (index < 3) return
-        // var obj = {}
-        // var name = ''
-        // $(this).find('td').each(function(index, element) {
-        //     var text = $(this).text().replace(/\r\n\t/g, '').trim()
-        //     if (index == 0) {
-        //         var key = "hall_name"
-        //     } else  if (index == 1) {
-        //         var key = 'breakfast'
-        //     } else if (index == 2) {
-        //         var key = 'lunch'
-        //     } else if (index == 3) {
-        //         var key = 'dinner'
-        //     } else if (index == 4) {
-        //         var key = 'late_night'
-        //     }
-        //     obj[key] = text.replace(/- +/g, '- ').trim()
-        // })
-        // response.push(obj)
     })
     response.push(obj)
     res.send(response)
