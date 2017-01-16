@@ -67,6 +67,20 @@ app.get('/hours', function (req, res) {
     Date (optional)
 */
 app.get('/menus', function (req, res) {
+	/*
+	var date = getDate(req, res)
+    var month = date.getMonth() + 1 //getMonth returns 0 based month
+    var day = date.getDate()
+    var year = date.getFullYear()
+    var url = util.format(overviewUrl, month, day, year)
+    request(url, function(error, response, body) {
+        if (error) {
+            sendError(res, error)
+        } else {
+            parseMenus(res, body)
+        }
+    })
+	*/
     // temporary cache file since website is down
     var html = fs.readFileSync("test.html");
     parseMenus(res, html);
@@ -162,6 +176,19 @@ function parseHours(res, body) {
 
 function parseMenus(res, html)
 {
+	// store links to nutrition/ingredient pages in map by item name
+	// TBD - parse each page to fill out response
+	var details = {};
+	var $ = cheerio.load(html);
+	$('li').each(function(index, element) {
+        $(this).find('a').each(function(index, element) {
+        	var name = $(this).text();
+        	var link = $(this).attr('href');
+        	details[name] = link;
+            //console.log($(this).text(), $(this).attr('href'));
+        });
+    });
+
     var response = 
     {
         "Breakfast" : 
