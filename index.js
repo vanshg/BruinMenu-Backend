@@ -8,9 +8,21 @@ var tabletojson = require('tabletojson');
 var fs = require('fs');
 var app = express()
 
-let hoursUrl = 'https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm?serviceDate=%d%%2F%d%%2F%d'
+let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'// yyyy-mm-dd
 let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
+
+let hallTitlesHours = [
+    'Covel',
+    'De Neve',
+    'FEAST at Rieber',
+    'Bruin Plate',
+    'Bruin Café',
+    'Café 1919',
+    'Rendezvous',
+    'De Neve Grab \'n\' Go',
+    'The Study at Hedrick'
+]
 
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
@@ -19,7 +31,6 @@ app.use(express.static('website'))
 
 /* Parameters:
     Date (optional)
-    MM-DD-YYYY
 */
 app.get('/overview', function (req, res) {
     var date = getDate(req, res)
@@ -37,14 +48,12 @@ app.get('/overview', function (req, res) {
 })
 
 /* Parameters:
-    Date
+    Date (optional)
 */
 app.get('/hours', function (req, res) {
-    var date = getDate(req, res)
-    var month = date.getMonth() + 1 //getMonth returns 0 based month
-    var day = date.getDate()
-    var year = date.getFullYear()
-    var url = util.format(hoursUrl, month, day, year)
+    var dateString = getDate(req, res)
+    console.log(dateString)
+    var url = util.format(hoursUrl, dateString)
     request(url, function(error, response, body) {
         if (error) {
             sendError(res, error)
@@ -55,7 +64,7 @@ app.get('/hours', function (req, res) {
 })
 
 /* Parameters:
-    Date
+    Date (optional)
 */
 app.get('/menus', function (req, res) {
     // temporary cache file since website is down
@@ -100,28 +109,54 @@ function parseMealPeriod(body, mealNumber) {
 
 function parseHours(res, body) {
     var response = []
+    let breakfast_key = 'breakfast'
+    let lunch_key = 'lunch'
+    let dinner_key = 'dinner'
+    let late_night_key = 'late_night'
+    var obj = {}
+    var hours = {}
     var $ = cheerio.load(body)
-    $('.articleBody table tr').each(function(index, element) {
-        if (index < 3) return
-        var obj = {}
-        var name = ''
-        $(this).find('td').each(function(index, element) {
-            var text = $(this).text().replace(/\r\n\t/g, '').trim()
-            if (index == 0) {
-                var key = "hall_name"
-            } else  if (index == 1) {
-                var key = 'breakfast'
-            } else if (index == 2) {
-                var key = 'lunch'
-            } else if (index == 3) {
-                var key = 'dinner'
-            } else if (index == 4) {
-                var key = 'late_night'
+    $('.hours-closed, .hours-closed-allday, .hours-location, .hours-range').each(function(index, element) {
+        var text = $(this).text().trim()
+        console.log(text)
+        if (hallTitlesHours.indexOf(text) != -1) {
+            if (!_.isEmpty(obj)) {
+                response.push(obj)
             }
-            obj[key] = text.replace(/- +/g, '- ').trim()
-        })
-        response.push(obj)
+            obj = {}
+            obj['hall_name'] = text
+            return
+        }
+        if (dinner_key in obj) {
+            obj[late_night_key] = text
+        } else if (lunch_key in obj) {
+            obj[dinner_key] = text
+        } else if (breakfast_key in obj) {
+            obj[lunch_key] = text
+        } else {
+            obj[breakfast_key] = text
+        }
+        // if (index < 3) return
+        // var obj = {}
+        // var name = ''
+        // $(this).find('td').each(function(index, element) {
+        //     var text = $(this).text().replace(/\r\n\t/g, '').trim()
+        //     if (index == 0) {
+        //         var key = "hall_name"
+        //     } else  if (index == 1) {
+        //         var key = 'breakfast'
+        //     } else if (index == 2) {
+        //         var key = 'lunch'
+        //     } else if (index == 3) {
+        //         var key = 'dinner'
+        //     } else if (index == 4) {
+        //         var key = 'late_night'
+        //     }
+        //     obj[key] = text.replace(/- +/g, '- ').trim()
+        // })
+        // response.push(obj)
     })
+    response.push(obj)
     res.send(response)
 }
 
@@ -268,12 +303,20 @@ function sendError(res, error) {
 }
 
 function getDate(req, res) {
-    var dateText = req.query['date']
+    let dateText = req.query['date']
     if (dateText) {
-        return new Date(dateText)
+        return dateText //new Date(dateText)
         // TODO: Catch invalid dateText format and send appropriate error message on incorrect format
     }
-    return new Date()
+    let date = new Date()
+    let month = date.getMonth() + 1 //getMonth returns 0 based month
+    let day = date.getDate()
+    let year = date.getFullYear()
+    return '' + year + '-' + minTwoDigits(month) + '-' + minTwoDigits(day)
+}
+
+function minTwoDigits(n) {
+  return (n < 10 ? '0' : '') + n;
 }
 
 // TODO: Have a job that runs every hour that refreshes all the menus
