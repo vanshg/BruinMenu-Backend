@@ -8,7 +8,17 @@ var tabletojson = require('tabletojson');
 var fs = require('fs');
 var app = express()
 
-let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'// yyyy-mm-dd
+/* 
+    If date is specified: Year-Month-Day (such as 2017-06-23 for June 23, 2017)
+
+    To test with local file:
+    var html = fs.readFileSync("test.html");
+    parseMenus(res, html);
+*/
+
+let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'
+// let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'// yyyy-mm-dd
+
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 // let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
 
@@ -23,7 +33,7 @@ let hallTitlesHours = [
     'De Neve Grab \'n\' Go',
     'The Study at Hedrick'
 ]
-
+    
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -123,18 +133,19 @@ function parseMealPeriod(body, mealNumber) {
 
 function parseHours(res, body) {
     var response = []
+    var obj = {}
+    var hours = {}
     let breakfast_key = 'breakfast'
     let lunch_key = 'lunch'
     let dinner_key = 'dinner'
     let late_night_key = 'late_night'
-    var obj = {}
-    var hours = {}
+    let limited_key = 'limited_menu'
+
     var $ = cheerio.load(body)
-    $('.hours-closed, .hours-closed-allday, .hours-location, .hours-range').each(function(index, element) {
+    $('.hours-location, .hours-range, .hours-closed, .hours-closed-allday').each(function(index, element){
         var text = $(this).text().trim()
-        console.log(text)
-        if (hallTitlesHours.indexOf(text) != -1) {
-            if (!_.isEmpty(obj)) {
+        if (hallTitlesHours.indexOf(text) != -1){
+            if (!_.isEmpty(obj)){
                 response.push(obj)
             }
             obj = {}
@@ -151,6 +162,7 @@ function parseHours(res, body) {
             obj[breakfast_key] = text
         }
     })
+
     response.push(obj)
     res.send(response)
 }
@@ -306,7 +318,7 @@ function parseMenus(res, html)
 
 function sendError(res, error) {
     //TODO: send JSON with the returned error message
-    console.log('error')
+    console.log(error)
     res.send(error)
 }
 
