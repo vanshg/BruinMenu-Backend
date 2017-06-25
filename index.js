@@ -332,7 +332,7 @@ function getDate(req, res) {
     let month = date.getMonth() + 1 //getMonth returns 0 based month
     let day = date.getDate()
     let year = date.getFullYear()
-    return '' + year + '/' + minTwoDigits(month) + '/' + minTwoDigits(day)
+    return '' + year + '-' + minTwoDigits(month) + '-' + minTwoDigits(day)
 }
 
 function minTwoDigits(n) {
