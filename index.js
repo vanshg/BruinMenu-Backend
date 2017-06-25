@@ -16,8 +16,8 @@ var app = express()
     parseMenus(res, html);
 */
 
-let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'
-// let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'// yyyy-mm-dd
+let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
+// hours testing URL: https://web.archive.org/web/20170509035312/http://menu.dining.ucla.edu/Hours
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 // let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
@@ -332,7 +332,7 @@ function getDate(req, res) {
     let month = date.getMonth() + 1 //getMonth returns 0 based month
     let day = date.getDate()
     let year = date.getFullYear()
-    return '' + year + '-' + minTwoDigits(month) + '-' + minTwoDigits(day)
+    return '' + year + '/' + minTwoDigits(month) + '/' + minTwoDigits(day)
 }
 
 function minTwoDigits(n) {
