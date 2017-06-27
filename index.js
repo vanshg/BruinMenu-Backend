@@ -17,6 +17,7 @@ var app = express()
 */
 
 let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
+let overviewUrl = 'http://menu.dining.ucla.edu/Menus/%s'
 // hours testing URL: https://web.archive.org/web/20170509035312/http://menu.dining.ucla.edu/Hours
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
@@ -33,6 +34,12 @@ let hallTitlesHours = [
     'De Neve Grab \'n\' Go',
     'The Study at Hedrick'
 ]
+
+let breakfast_key = 'breakfast'
+let lunch_key = 'lunch'
+let dinner_key = 'dinner'
+let late_night_key = 'late_night'
+let limited_key = 'limited_menu'
     
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
@@ -48,11 +55,9 @@ app.listen(app.get('port'), function() {
     Date (optional)
 */
 app.get('/overview', function (req, res) {
-    var date = getDate(req, res)
-    var month = date.getMonth() + 1 //getMonth returns 0 based month
-    var day = date.getDate()
-    var year = date.getFullYear()
-    var url = util.format(overviewUrl, month, day, year)
+    var dateString = getDate(req, res)
+
+    var url = util.format(overviewUrl, dateString)
     request(url, function(error, response, body) {
         if (error) {
             sendError(res, error)
@@ -118,28 +123,71 @@ app.get('/menus', function (req, res) {
 // })
 
 function parseOverviewPage(res, body) {
-    var response = {}
-    response.breakfast = parseMealPeriod(body, 0)
-    response.lunch = parseMealPeriod(body, 1)
-    response.dinner = parseMealPeriod(body, 2)
+    var response = []
+    var obj = {}
+    
+    // $('.recipelink').each(function(index, element){
+    //     var text = $(this).text().trim()
+    //     var tag = $(this)
+    //     obj[tag.attr('href')] = text
+    // })
+
+    obj['breakfast'] = parseMealPeriod(body, 0)
+    obj['lunch'] = parseMealPeriod(body, 1)
+    obj['dinner'] = parseMealPeriod(body, 2)
+    response.push(obj)
     res.send(response)
 }
 
 function parseMealPeriod(body, mealNumber) {
-    var result = []
+    var result = {}
+    
+    var $ = cheerio.load(body)
 
+    $('.meal-detail-link').each(function(index, element){
+        var text = $(this).text().trim()
+        if (mealNumber == 0){
+            if (text.indexOf('Breakfast') == -1){
+                return
+            }
+        }
+        else if (mealNumber == 1){
+            if (text.indexOf('Lunch') == -1){
+                return
+            }
+        }
+        else if (mealNumber == 2){
+            if (text.indexOf('Dinner') == -1){
+                return
+            }
+        }
+
+        // If we have made it to here, then we know that we have reached the correct 
+        var currElem = $(this).next()
+        while (currElem.hasClass('menu-block')){
+            console.log('in here')
+            var name = currElem.find('h3')
+            result[name.text().trim()] = 'hi'
+            currElem = currElem.next()    
+        }
+        
+
+        // $('.menu-block.half-col').each(function(index, element){
+        //     var text1 = $(this).children()
+        //     if (text1.hasClass('col-selector')){
+        //         result[index] = text1.text().trim()
+        //     }
+        //     else if (text1.hasClass('sect-list')){
+        //         var menuObj = {}
+        //     }
+        // })
+    })    
     return result
 }
 
 function parseHours(res, body) {
     var response = []
     var obj = {}
-    var hours = {}
-    let breakfast_key = 'breakfast'
-    let lunch_key = 'lunch'
-    let dinner_key = 'dinner'
-    let late_night_key = 'late_night'
-    let limited_key = 'limited_menu'
 
     var $ = cheerio.load(body)
     $('.hours-location, .hours-range, .hours-closed, .hours-closed-allday').each(function(index, element){
