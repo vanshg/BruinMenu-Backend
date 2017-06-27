@@ -169,12 +169,10 @@ function parseMealPeriod(body, mealNumber) {
 
             var itemList = currElem.find('.recipelink')
             var currItem = itemList.first()
-            var itemPointer = itemList;
             var itemNames = {}
-            for (var i = 0; i < itemList.length; i++){
+            for (var i = 1; i < itemList.length; i++){
                 itemNames[i] = currItem.text().trim()
-                itemPointer = itemList.next()
-                currItem = currItem.next()
+                currItem = itemList.eq(i)
             }
             result[name.text().trim()] = itemNames      
 
