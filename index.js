@@ -165,22 +165,21 @@ function parseMealPeriod(body, mealNumber) {
         // If we have made it to here, then we know that we have reached the correct 
         var currElem = $(this).next()
         while (currElem.hasClass('menu-block')){
-            console.log('in here')
             var name = currElem.find('h3')
-            result[name.text().trim()] = 'hi'
+
+            var itemList = currElem.find('.recipelink')
+            var currItem = itemList.first()
+            var itemPointer = itemList;
+            var itemNames = {}
+            for (var i = 0; i < itemList.length; i++){
+                itemNames[i] = currItem.text().trim()
+                itemPointer = itemList.next()
+                currItem = currItem.next()
+            }
+            result[name.text().trim()] = itemNames      
+
             currElem = currElem.next()    
         }
-        
-
-        // $('.menu-block.half-col').each(function(index, element){
-        //     var text1 = $(this).children()
-        //     if (text1.hasClass('col-selector')){
-        //         result[index] = text1.text().trim()
-        //     }
-        //     else if (text1.hasClass('sect-list')){
-        //         var menuObj = {}
-        //     }
-        // })
     })    
     return result
 }
