@@ -126,11 +126,8 @@ function parseOverviewPage(res, body) {
     var response = []
     var obj = {}
     
-    // $('.recipelink').each(function(index, element){
-    //     var text = $(this).text().trim()
     //     var tag = $(this)
     //     obj[tag.attr('href')] = text
-    // })
 
     obj['breakfast'] = parseMealPeriod(body, 0)
     obj['lunch'] = parseMealPeriod(body, 1)
@@ -146,36 +143,40 @@ function parseMealPeriod(body, mealNumber) {
 
     $('.meal-detail-link').each(function(index, element){
         var text = $(this).text().trim()
-        if (mealNumber == 0){
-            if (text.indexOf('Breakfast') == -1){
+        if (mealNumber == 0)
+            if (text.indexOf('Breakfast') == -1)
                 return
-            }
-        }
-        else if (mealNumber == 1){
-            if (text.indexOf('Lunch') == -1){
+        else if (mealNumber == 1)
+            if (text.indexOf('Lunch') == -1)
                 return
-            }
-        }
-        else if (mealNumber == 2){
-            if (text.indexOf('Dinner') == -1){
+        else if (mealNumber == 2)
+            if (text.indexOf('Dinner') == -1)
                 return
-            }
-        }
 
-        // If we have made it to here, then we know that we have reached the correct 
         var currElem = $(this).next()
         while (currElem.hasClass('menu-block')){
             var name = currElem.find('h3')
 
-            var itemList = currElem.find('.recipelink')
-            var currItem = itemList.first()
-            var itemNames = {}
-            for (var i = 1; i < itemList.length; i++){
-                itemNames[i] = currItem.text().trim()
-                currItem = itemList.eq(i)
-            }
-            result[name.text().trim()] = itemNames      
+            var itemList = currElem.find('.menu-item')
+            var items = []
+            console.log(itemList.length)
+            for (var i = 0; i < itemList.length; i++){
+                var currItem = itemList.eq(i)
+                var itemName = currItem.find('.recipelink').text().trim()
+                var itemRecipe = currItem.find('.recipelink').attr('href')
 
+                var itemNames = {}
+                var itemCodesArr = []
+                itemNames['name'] = itemName
+                itemNames['recipelink'] = itemRecipe
+                var itemCodes = currItem.find('.tt-prodwebcode').find('img')
+                for (var j = 0; j < itemCodes.length; j++){
+                    itemCodesArr[j] = itemCodes.eq(j).attr('alt')
+                }
+                itemNames['itemcodes'] = itemCodesArr
+                items[i] = itemNames
+            }
+            result[name.text().trim()] = items
             currElem = currElem.next()    
         }
     })    
