@@ -156,27 +156,33 @@ function parseMealPeriod(body, mealNumber) {
         var currElem = $(this).next()
         while (currElem.hasClass('menu-block')){
             var name = currElem.find('h3')
+            var sections = {}
+            var sectionNames = currElem.find('.sect-item')
+            for (var h = 0; h < sectionNames.length; h++){
+                var sectionName = sectionNames.text()
+                var match = sectionName.match(/(\r\n[A-Z \ta-z]+\r\n)/g)
+                var itemList = currElem.find('.menu-item')
+                var items = []
+                for (var i = 0; i < itemList.length; i++){
+                    var currItem = itemList.eq(i)
+                    var itemName = currItem.find('.recipelink').text().trim()
+                    var itemRecipe = currItem.find('.recipelink').attr('href')
 
-            var itemList = currElem.find('.menu-item')
-            var items = []
-            console.log(itemList.length)
-            for (var i = 0; i < itemList.length; i++){
-                var currItem = itemList.eq(i)
-                var itemName = currItem.find('.recipelink').text().trim()
-                var itemRecipe = currItem.find('.recipelink').attr('href')
-
-                var itemNames = {}
-                var itemCodesArr = []
-                itemNames['name'] = itemName
-                itemNames['recipelink'] = itemRecipe
-                var itemCodes = currItem.find('.tt-prodwebcode').find('img')
-                for (var j = 0; j < itemCodes.length; j++){
-                    itemCodesArr[j] = itemCodes.eq(j).attr('alt')
+                    var itemNames = {}
+                    var itemCodesArr = []
+                    itemNames['name'] = itemName
+                    itemNames['recipelink'] = itemRecipe
+                    var itemCodes = currItem.find('.tt-prodwebcode').find('img')
+                    for (var j = 0; j < itemCodes.length; j++){
+                        itemCodesArr[j] = itemCodes.eq(j).attr('alt')
+                    }
+                    itemNames['itemcodes'] = itemCodesArr
+                    items[i] = itemNames
                 }
-                itemNames['itemcodes'] = itemCodesArr
-                items[i] = itemNames
+                sections[match[0].trim()] = items
             }
-            result[name.text().trim()] = items
+
+            result[name.text().trim()] = sections
             currElem = currElem.next()    
         }
     })    
@@ -380,7 +386,7 @@ function getDate(req, res) {
     let year = date.getFullYear()
     return '' + year + '-' + minTwoDigits(month) + '-' + minTwoDigits(day)
 }
-
+ 
 function minTwoDigits(n) {
   return (n < 10 ? '0' : '') + n;
 }
