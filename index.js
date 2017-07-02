@@ -8,7 +8,18 @@ var tabletojson = require('tabletojson');
 var fs = require('fs');
 var app = express()
 
-let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s'// yyyy-mm-dd
+/* 
+    If date is specified: Year-Month-Day (such as 2017-06-23 for June 23, 2017)
+
+    To test with local file:
+    var html = fs.readFileSync("test.html");
+    parseMenus(res, html);
+*/
+
+let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
+let overviewUrl = 'http://menu.dining.ucla.edu/Menus/%s'
+// hours testing URL: https://web.archive.org/web/20170509035312/http://menu.dining.ucla.edu/Hours
+
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 // let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
 
@@ -24,6 +35,12 @@ let hallTitlesHours = [
     'The Study at Hedrick'
 ]
 
+let breakfast_key = 'breakfast'
+let lunch_key = 'lunch'
+let dinner_key = 'dinner'
+let late_night_key = 'late_night'
+let limited_key = 'limited_menu'
+    
 app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -38,11 +55,9 @@ app.listen(app.get('port'), function() {
     Date (optional)
 */
 app.get('/overview', function (req, res) {
-    var date = getDate(req, res)
-    var month = date.getMonth() + 1 //getMonth returns 0 based month
-    var day = date.getDate()
-    var year = date.getFullYear()
-    var url = util.format(overviewUrl, month, day, year)
+    var dateString = getDate(req, res)
+
+    var url = util.format(overviewUrl, dateString)
     request(url, function(error, response, body) {
         if (error) {
             sendError(res, error)
@@ -108,33 +123,81 @@ app.get('/menus', function (req, res) {
 // })
 
 function parseOverviewPage(res, body) {
-    var response = {}
-    response.breakfast = parseMealPeriod(body, 0)
-    response.lunch = parseMealPeriod(body, 1)
-    response.dinner = parseMealPeriod(body, 2)
+    var response = []
+    var obj = {}
+    
+    //     var tag = $(this)
+    //     obj[tag.attr('href')] = text
+
+    obj['breakfast'] = parseMealPeriod(body, 0)
+    obj['lunch'] = parseMealPeriod(body, 1)
+    obj['dinner'] = parseMealPeriod(body, 2)
+    response.push(obj)
     res.send(response)
 }
 
 function parseMealPeriod(body, mealNumber) {
-    var result = []
+    var result = {}
+    
+    var $ = cheerio.load(body)
 
+    $('.meal-detail-link').each(function(index, element){
+        var text = $(this).text().trim()
+        if (mealNumber == 0)
+            if (text.indexOf('Breakfast') == -1)
+                return
+        else if (mealNumber == 1)
+            if (text.indexOf('Lunch') == -1)
+                return
+        else if (mealNumber == 2)
+            if (text.indexOf('Dinner') == -1)
+                return
+
+        var currElem = $(this).next()
+        while (currElem.hasClass('menu-block')){
+            var name = currElem.find('h3')
+            var sections = {}
+            var sectionNames = currElem.find('.sect-item')
+            for (var h = 0; h < sectionNames.length; h++){
+                var sectionName = sectionNames.eq(h).text()
+                var match = sectionName.match(/(\r\n[A-Z \ta-z]+\r\n)/g)
+                var itemList = currElem.find('.menu-item')
+                var items = []
+                for (var i = 0; i < itemList.length; i++){
+                    var currItem = itemList.eq(i)
+                    var itemName = currItem.find('.recipelink').text().trim()
+                    var itemRecipe = currItem.find('.recipelink').attr('href')
+
+                    var itemNames = {}
+                    var itemCodesArr = []
+                    itemNames['name'] = itemName
+                    itemNames['recipelink'] = itemRecipe
+                    var itemCodes = currItem.find('.tt-prodwebcode').find('img')
+                    for (var j = 0; j < itemCodes.length; j++){
+                        itemCodesArr[j] = itemCodes.eq(j).attr('alt')
+                    }
+                    itemNames['itemcodes'] = itemCodesArr
+                    items[i] = itemNames
+                }
+                sections[match[0].trim()] = items
+            }
+
+            result[name.text().trim()] = sections
+            currElem = currElem.next()    
+        }
+    })    
     return result
 }
 
 function parseHours(res, body) {
     var response = []
-    let breakfast_key = 'breakfast'
-    let lunch_key = 'lunch'
-    let dinner_key = 'dinner'
-    let late_night_key = 'late_night'
     var obj = {}
-    var hours = {}
+
     var $ = cheerio.load(body)
-    $('.hours-closed, .hours-closed-allday, .hours-location, .hours-range').each(function(index, element) {
+    $('.hours-location, .hours-range, .hours-closed, .hours-closed-allday').each(function(index, element){
         var text = $(this).text().trim()
-        console.log(text)
-        if (hallTitlesHours.indexOf(text) != -1) {
-            if (!_.isEmpty(obj)) {
+        if (hallTitlesHours.indexOf(text) != -1){
+            if (!_.isEmpty(obj)){
                 response.push(obj)
             }
             obj = {}
@@ -151,6 +214,7 @@ function parseHours(res, body) {
             obj[breakfast_key] = text
         }
     })
+
     response.push(obj)
     res.send(response)
 }
@@ -306,7 +370,7 @@ function parseMenus(res, html)
 
 function sendError(res, error) {
     //TODO: send JSON with the returned error message
-    console.log('error')
+    console.log(error)
     res.send(error)
 }
 
@@ -322,7 +386,7 @@ function getDate(req, res) {
     let year = date.getFullYear()
     return '' + year + '-' + minTwoDigits(month) + '-' + minTwoDigits(day)
 }
-
+ 
 function minTwoDigits(n) {
   return (n < 10 ? '0' : '') + n;
 }
