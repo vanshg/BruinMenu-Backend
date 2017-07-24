@@ -36,8 +36,32 @@
   <p>Get the hours for the dining halls and cafes.</p>
   <p>Create a GET request with the following format: bruindining.herokuapp.com/hours?date=YYYY-MM-DD</p>
   <p>If the date is not specified, the default date is set to today's date.</p>
-  <p>The following screenshot shows an example of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed with your program of choice.</p>
-  <img src="/hoursExample.jpeg" alt="Car" style="width:100%">
+  <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed with your program of choice.</p>
+  <textarea name="Text1" cols="40" rows="25" style="background-color: ghostwhite">&#10;
+  	[
+	  {
+	    "hall_name": "Covel",
+	    "breakfast": "7:00 am - 9:00 am",
+	    "lunch": "11:00 am - 2:00 pm",
+	    "dinner": "5:00 pm - 8:00 pm",
+	    "late_night": "CLOSED"
+	  },
+	  {
+	    "hall_name": "Café 1919",
+	    "breakfast": "7:00 am - 11:00 am",
+	    "lunch": "11:00 am - 2:00 pm",
+	    "dinner": "CLOSED",
+	    "late_night": "CLOSED"
+	  },
+	  {
+	    "hall_name": "Rendezvous",
+	    "breakfast": "7:00 am - 10:30 am",
+	    "lunch": "11:00 am - 4:30 pm",
+	    "dinner": "5:00 pm - 9:00 pm",
+	    "late_night": "CLOSED"
+	  }
+	]
+  </textarea>
   </div>
 </div>
 </div>
