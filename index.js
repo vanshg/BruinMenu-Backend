@@ -131,18 +131,20 @@ app.get('/menus', function (req, res) {
 
 // Bruin Cafe
 app.get('/Bruin-Cafe', function (req, res) {
-    request(bcafeUrl, function(error, response, body) {
-        if (error) {
-            sendError(res, error);
-        } else {
-            parseBruinCafe(res, body);
-        }
-    });
+    var bcafeHTML = fs.readFileSync('bcafe.html');
+    parseBruinCafe(res, bcafeHTML);
+    // request(bcafeUrl, function(error, response, body) {
+    //     if (error) {
+    //         sendError(res, error);
+    //     } else {
+    //         parseBruinCafe(res, body);
+    //     }
+    // });
 });
 
 function parseBruinCafe(res, body) {
     var response = {};
-    
+
     var $ = cheerio.load(body);
     $('.page-nav-button').each(function(index, element) {
         response[$(this).text()] = {};
