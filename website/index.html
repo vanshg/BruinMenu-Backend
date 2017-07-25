@@ -10,8 +10,8 @@
 
 <!-- Side Navigation -->
 <nav class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-center" style="display:none" id="mySidebar">
-  <h1 class="w3-xxxlarge w3-text-theme">Side Navigation</h1>
-  <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i></button>
+  <h1 class="w3-xxxlarge w3-text-theme">Quick Links</h1>
+  <button class="w3-bar-item w3-button" onclick="w3_close()">Main Menu</button>
   <a href="http://bruindining.herokuapp.com/overview" class="w3-bar-item w3-button">Overview</a>
   <a href="http://bruindining.herokuapp.com/hours" class="w3-bar-item w3-button">Hours</a>
 </nav>
@@ -29,9 +29,9 @@
   <h3>What can this backend do?</h3>
 </div>
 
-<div class="w3-row-padding"> 
-
-<div class="w3-card-2">
+<hr>
+<button onclick="myAccFunc('Demo1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Hours</button>
+<div id="Demo1" class="w3-hide">
   <div class="w3-container">
   <p>Get the hours for the dining halls and cafes.</p>
   <p>Create a GET request with the following format: bruindining.herokuapp.com/hours?date=YYYY-MM-DD</p>
@@ -64,35 +64,31 @@
   </textarea>
   </div>
 </div>
+<button onclick="myAccFunc('Demo2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Overview</button>
+<div id="Demo2" class="w3-hide">
+  <a href="#" class="w3-button w3-block w3-left-align">Link 1</a>
+  <a href="#" class="w3-button w3-block w3-left-align">Link 2</a>
+  <a href="#" class="w3-button w3-block w3-left-align">Link 3</a>
 </div>
-
-<div class="w3-row-padding"> 
-<div class="w3-card-4">
+<button onclick="myAccFunc('Demo3')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Cafe</button>
+<div id="Demo3" class="w3-hide w3-black">
   <div class="w3-container">
-  <p>w3-card-4</p>
+    <p>Accordion with Images:</p>
+    <img src="/w3images/fjords.jpg" style="width:30%;" class="w3-animate-zoom">
+    <p>Trolltunga, Norway</p>
   </div>
 </div>
 </div>
 
-<div class="w3-row-padding"> 
-<div class="w3-card-4">
-  <div class="w3-container">
-  <p>w3-card-4</p>
-  </div>
+<div class="w3-container w3-center">
+  <hr>
 </div>
-</div>
-
 <!-- Footer -->
 <footer class="w3-container w3-theme-dark w3-padding-16">
-  <h3>Remarks</h3>
+  <h3>Remarks:</h3>
   <p>Website powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  <p>Backend powered by Node.js and Cheerio.js and hosted on Heroku.</p>
+  <p>Backend powered by Node.js, Express.js and Cheerio.js and hosted on Heroku.</p>
   <p>Other projects by <a href="https://www.github.com/sahilmgandhi" target="_blank">Sahil</a>, <a href="https://www.github.com/vanshg" target="_blank">Vansh</a> and <a href="https://www.github.com/jzaturensky" target="_blank">Jonathan</a>.</p>
-  <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
-    <span class="w3-text w3-theme-light w3-padding">Go To Top</span>    
-    <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge">
-    <i class="fa fa-chevron-circle-up"></i></span></a>
-  </div>
 </footer>
 
 <!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
@@ -109,15 +105,15 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
 }
 
-// // Accordions
-// function myAccFunc(id) {
-//     var x = document.getElementById(id);
-//     if (x.className.indexOf("w3-show") == -1) {
-//         x.className += " w3-show";
-//     } else { 
-//         x.className = x.className.replace(" w3-show", "");
-//     }
-// }
+// Accordions
+function myAccFunc(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
 
 </script>
 
@@ -135,26 +131,3 @@ function w3_close() {
 </div>
  -->
 
-<!-- <hr>
-<h2 class="w3-center">Click below for the different </h2>
-<button onclick="myAccFunc('Demo1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">Open Section 1</button>
-<div id="Demo1" class="w3-hide">
-  <div class="w3-container">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  </div>
-</div>
-<button onclick="myAccFunc('Demo2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">Open Section 2</button>
-<div id="Demo2" class="w3-hide">
-  <a href="#" class="w3-button w3-block w3-left-align">Link 1</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Link 2</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Link 3</a>
-</div>
-<button onclick="myAccFunc('Demo3')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">Open Section 3</button>
-<div id="Demo3" class="w3-hide w3-black">
-  <div class="w3-container">
-    <p>Accordion with Images:</p>
-    <img src="/w3images/fjords.jpg" style="width:30%;" class="w3-animate-zoom">
-    <p>Trolltunga, Norway</p>
-  </div>
-</div>
-</div> -->

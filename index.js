@@ -51,12 +51,10 @@ app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
 
-
 app.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/index.html'));
   //__dirname : It will resolve to your project folder.
 });
-
 
 /* Parameters:
     Date (optional)
