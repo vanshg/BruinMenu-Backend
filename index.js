@@ -19,6 +19,8 @@ var app = express()
 let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
 let overviewUrl = 'http://menu.dining.ucla.edu/Menus/%s'
 // hours testing URL: https://web.archive.org/web/20170509035312/http://menu.dining.ucla.edu/Hours
+// bcafe test URL:
+const bcafeUrl = 'http://web.archive.org/web/20170416221050/http://menu.dining.ucla.edu/Menus/BruinCafe';
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 // let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
@@ -126,6 +128,28 @@ app.get('/menus', function (req, res) {
 //     })
 //     res.send('TODO');
 // })
+
+// Bruin Cafe
+app.get('/Bruin-Cafe', function (req, res) {
+    request(bcafeUrl, function(error, response, body) {
+        if (error) {
+            sendError(res, error);
+        } else {
+            parseBruinCafe(res, body);
+        }
+    });
+});
+
+function parseBruinCafe(res, body) {
+    var response = {};
+    
+    var $ = cheerio.load(body);
+    $('.page-nav-button').each(function(index, element) {
+        response[$(this).text()] = {};
+    });
+
+    res.send(response);
+}
 
 function parseOverviewPage(res, body) {
     var response = []
@@ -374,7 +398,6 @@ function parseMenus(res, html)
 }
 
 function sendError(res, error) {
-    //TODO: send JSON with the returned error message
     console.log(error)
     res.send(error)
 }
