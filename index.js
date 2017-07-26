@@ -77,7 +77,6 @@ app.get('/overview', function (req, res) {
 */
 app.get('/hours', function (req, res) {
     var dateString = getDate(req, res)
-    console.log(dateString)
     var url = util.format(hoursUrl, dateString)
     request(url, function(error, response, body) {
         if (error) {
@@ -372,6 +371,42 @@ function parseMenus(res, html)
     // send the response object to the /menus page
     res.send(response);
 }
+
+/* Parameters:
+    Date (optional)
+*/
+app.get('/Cafe-1919', function (req, res) {
+    var dateString = getDate(req, res)
+
+    var url = util.format(overviewUrl, dateString)
+    request(url, function(error, response, body) {
+        if (error) {
+            sendError(res, error)
+        } else {
+            parse1919(res, body)
+        }
+    })
+})
+
+function parse1919(res, body) {
+    var response = []
+    var obj = {}
+    
+    //     var tag = $(this)
+    //     obj[tag.attr('href')] = text
+
+    obj['breakfast'] = ""
+    obj['pizzette'] = ""
+    obj['panini'] = ""
+    obj['insalate'] = ""
+    obj['sides'] = ""
+    obj['bibite'] = ""
+    obj['dolci'] = ""
+    response.push(obj)
+    res.send(response)
+}
+
+
 
 function sendError(res, error) {
     //TODO: send JSON with the returned error message
