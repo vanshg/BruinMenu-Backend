@@ -376,37 +376,110 @@ function parseMenus(res, html)
     Date (optional)
 */
 app.get('/Cafe-1919', function (req, res) {
-    var dateString = getDate(req, res)
-
-    var url = util.format(overviewUrl, dateString)
-    request(url, function(error, response, body) {
-        if (error) {
-            sendError(res, error)
-        } else {
-            parse1919(res, body)
-        }
-    })
+    
+    var cf1919 = fs.readFileSync("Cafe1919.html", 'UTF8')
+    parse1919(res, cf1919)
 })
 
 function parse1919(res, body) {
     var response = []
     var obj = {}
-    
-    //     var tag = $(this)
-    //     obj[tag.attr('href')] = text
 
-    obj['breakfast'] = ""
-    obj['pizzette'] = ""
-    obj['panini'] = ""
-    obj['insalate'] = ""
-    obj['sides'] = ""
-    obj['bibite'] = ""
-    obj['dolci'] = ""
+    obj['breakfast'] = parse1919Breakfast(body)
+    obj['pizzette'] = parse1919Pizzette(body)
+    obj['panini'] = parse1919Panini(body)
+    obj['insalate'] = parse1919Insalate(body)
+    obj['sides'] = parse1919Sides(body)
+    obj['bibite'] = parse1919Bibite(body)
+    obj['dolci'] = parse1919Dolci(body)
     response.push(obj)
     res.send(response)
 }
 
+function parse1919Breakfast(body){
+    var result = {}
 
+    var $ = cheerio.load(body)
+
+    $('.swiper-container').each(function(index, element){
+        var slides = $(this).find('.swiper-slide')
+        var currSlide = slides.eq(0)
+        var currItem = currSlide.eq(0)
+        console.log(currSlide.text().trim())
+        console.log(currItem.find('.menu-item').find('.recipelink').attr('href'))    
+    })
+    // $('.meal-detail-link').each(function(index, element){
+    //     var text = $(this).text().trim()
+    //     if (mealNumber == 0)
+    //         if (text.indexOf('Breakfast') == -1)
+    //             return
+    //     else if (mealNumber == 1)
+    //         if (text.indexOf('Lunch') == -1)
+    //             return
+    //     else if (mealNumber == 2)
+    //         if (text.indexOf('Dinner') == -1)
+    //             return
+
+    //     var currElem = $(this).next()
+    //     while (currElem.hasClass('menu-block')){
+    //         var name = currElem.find('h3')
+    //         var sections = {}
+    //         var sectionNames = currElem.find('.sect-item')
+    //         for (var h = 0; h < sectionNames.length; h++){
+    //             var sectionName = sectionNames.eq(h).text()
+    //             var match = sectionName.match(/(\r\n[A-Z \ta-z]+\r\n)/g)
+    //             var itemList = currElem.find('.menu-item')
+    //             var items = []
+    //             for (var i = 0; i < itemList.length; i++){
+    //                 var currItem = itemList.eq(i)
+    //                 var itemName = currItem.find('.recipelink').text().trim()
+                    // var itemRecipe = currItem.find('.recipelink').attr('href')
+
+    //                 var itemNames = {}
+    //                 var itemCodesArr = []
+    //                 itemNames['name'] = itemName
+    //                 itemNames['recipelink'] = itemRecipe
+    //                 var itemCodes = currItem.find('.tt-prodwebcode').find('img')
+    //                 for (var j = 0; j < itemCodes.length; j++){
+    //                     itemCodesArr[j] = itemCodes.eq(j).attr('alt')
+    //                 }
+    //                 itemNames['itemcodes'] = itemCodesArr
+    //                 items[i] = itemNames
+    //             }
+    //             sections[match[0].trim()] = items
+    //         }
+
+    //         result[name.text().trim()] = sections
+    //         currElem = currElem.next()    
+    //     }
+    // })    
+
+    return result
+}
+
+function parse1919Pizzette(body){
+
+}
+
+function parse1919Panini(body){
+
+}
+
+function parse1919Insalate(body){
+
+}
+
+function parse1919Sides(body){
+
+}
+
+function parse1919Bibite(body){
+
+}
+
+function parse1919Dolci(body){
+
+}
 
 function sendError(res, error) {
     //TODO: send JSON with the returned error message
