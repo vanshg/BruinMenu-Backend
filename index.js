@@ -18,6 +18,7 @@ var app = express()
 
 let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
 let overviewUrl = 'http://menu.dining.ucla.edu/Menus/%s'
+let cafe1919Url = 'http://menu.dining.ucla.edu/Menus/Cafe1919'
 // hours testing URL: https://web.archive.org/web/20170509035312/http://menu.dining.ucla.edu/Hours
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
@@ -377,36 +378,44 @@ function parseMenus(res, html)
 */
 app.get('/Cafe-1919', function (req, res) {
     
-    var cf1919 = fs.readFileSync("Cafe1919.html", 'UTF8')
+    var cf1919 = fs.readFileSync("1919.html")
     parse1919(res, cf1919)
+
+    // request(cafe1919Url, function(error, response, body) {
+    //     if (error) {
+    //         sendError(res, error)
+    //     } else {
+    //         parse1919(res, body)
+    //     }
+    // })
 })
 
 function parse1919(res, body) {
     var response = []
     var obj = {}
 
-    obj['breakfast'] = parse1919Breakfast(body)
-    obj['pizzette'] = parse1919Pizzette(body)
-    obj['panini'] = parse1919Panini(body)
-    obj['insalate'] = parse1919Insalate(body)
-    obj['sides'] = parse1919Sides(body)
-    obj['bibite'] = parse1919Bibite(body)
-    obj['dolci'] = parse1919Dolci(body)
+    obj['breakfast'] = parse1919Swiper(body, 0)
+    obj['pizzette'] = parse1919Swiper(body, 1)
+    obj['panini'] = parse1919Swiper(body, 2)
+    obj['insalate'] = parse1919Swiper(body, 3)
+    obj['sides'] = parse1919Swiper(body, 4)
+    obj['bibite'] = parse1919Swiper(body, 5)
+    obj['dolci'] = parse1919Swiper(body, 6)
     response.push(obj)
     res.send(response)
 }
 
-function parse1919Breakfast(body){
+function parse1919Swiper(body, pos){
     var result = {}
 
     var $ = cheerio.load(body)
 
-    $('.swiper-container').each(function(index, element){
-        var slides = $(this).find('.swiper-slide')
-        var currSlide = slides.eq(0)
-        var currItem = currSlide.eq(0)
-        console.log(currSlide.text().trim())
-        console.log(currItem.find('.menu-item').find('.recipelink').attr('href'))    
+    $('.swiper-slide').each(function(index, element){
+        if (index == pos){
+            var slides = $(this).find('.menu-item')
+            // console.log(slides.find('.recipelink').attr('href'))
+            result['recipelink'] = slides.find('.recipelink').attr('href')        
+        }
     })
     // $('.meal-detail-link').each(function(index, element){
     //     var text = $(this).text().trim()
@@ -455,30 +464,6 @@ function parse1919Breakfast(body){
     // })    
 
     return result
-}
-
-function parse1919Pizzette(body){
-
-}
-
-function parse1919Panini(body){
-
-}
-
-function parse1919Insalate(body){
-
-}
-
-function parse1919Sides(body){
-
-}
-
-function parse1919Bibite(body){
-
-}
-
-function parse1919Dolci(body){
-
 }
 
 function sendError(res, error) {
