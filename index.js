@@ -154,7 +154,6 @@ function parseBruinCafe(res, body) {
 }
 
 function parseOverviewPage(res, body) {
-    var response = []
     var obj = {}
     
     //     var tag = $(this)
@@ -163,8 +162,7 @@ function parseOverviewPage(res, body) {
     obj['breakfast'] = parseMealPeriod(body, 0)
     obj['lunch'] = parseMealPeriod(body, 1)
     obj['dinner'] = parseMealPeriod(body, 2)
-    response.push(obj)
-    res.send(response)
+    res.send(obj)
 }
 
 function parseMealPeriod(body, mealNumber) {
@@ -417,7 +415,6 @@ app.get('/Cafe-1919', function (req, res) {
 })
 
 function parse1919(res, body) {
-    var response = []
     var obj = {}
 
     obj['breakfast'] = parse1919Swiper(body, 0)
@@ -427,8 +424,7 @@ function parse1919(res, body) {
     obj['sides'] = parse1919Swiper(body, 4)
     obj['bibite'] = parse1919Swiper(body, 5)
     obj['dolci'] = parse1919Swiper(body, 6)
-    response.push(obj)
-    res.send(response)
+    res.send(obj)
 }
 
 function parse1919Swiper(body, pos){
@@ -443,7 +439,13 @@ function parse1919Swiper(body, pos){
                 var itemInfo = {}
                 itemInfo['name'] = slides.eq(i).find('.recipelink').text().trim()
                 itemInfo['recipelink'] = slides.eq(i).find('.recipelink').attr('href')
-=                items[i] = itemInfo
+                var itemCodesArr = []
+                var itemCodes = slides.eq(i).find('.webcode')
+                for (var j = 0; j < itemCodes.length; j++){
+                    itemCodesArr[j] = itemCodes.eq(j).attr('alt')
+                }
+                itemInfo['itemCodes'] = itemCodesArr
+                items[i] = itemInfo
             }
         }
     })
