@@ -406,15 +406,19 @@ function parse1919(res, body) {
 }
 
 function parse1919Swiper(body, pos){
-    var result = {}
-
+    var items = []
     var $ = cheerio.load(body)
 
     $('.swiper-slide').each(function(index, element){
         if (index == pos){
             var slides = $(this).find('.menu-item')
             // console.log(slides.find('.recipelink').attr('href'))
-            result['recipelink'] = slides.find('.recipelink').attr('href')        
+            for (var i = 0; i < slides.length; i++){
+                var itemInfo = {}
+                itemInfo['name'] = slides.eq(i).find('.recipelink').text().trim()
+                itemInfo['recipelink'] = slides.eq(i).find('.recipelink').attr('href')
+=                items[i] = itemInfo
+            }
         }
     })
     // $('.meal-detail-link').each(function(index, element){
@@ -463,7 +467,7 @@ function parse1919Swiper(body, pos){
     //     }
     // })    
 
-    return result
+    return items
 }
 
 function sendError(res, error) {
