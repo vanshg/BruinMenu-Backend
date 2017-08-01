@@ -14,6 +14,8 @@ var app = express()
     To test with local file:
     var html = fs.readFileSync("test.html");
     parseMenus(res, html);
+
+    Top of the HTML file MUST contain <!DOCTYPE html> in order to work!
 */
 
 let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
@@ -88,29 +90,6 @@ app.get('/hours', function (req, res) {
             parseHours(res, body)
         }
     })
-})
-
-/* Parameters:
-    Date (optional)
-*/
-app.get('/menus', function (req, res) {
-	/*
-	var date = getDate(req, res)
-    var month = date.getMonth() + 1 //getMonth returns 0 based month
-    var day = date.getDate()
-    var year = date.getFullYear()
-    var url = util.format(overviewUrl, month, day, year)
-    request(url, function(error, response, body) {
-        if (error) {
-            sendError(res, error)
-        } else {
-            parseMenus(res, body)
-        }
-    })
-	*/
-    // temporary cache file since website is down
-    var html = fs.readFileSync("test.html");
-    parseMenus(res, html);
 })
 
 // app.get('/calendarYear', function(req, res){
@@ -248,155 +227,6 @@ function parseHours(res, body) {
     res.send(response)
 }
 
-function parseMenus(res, html)
-{
-	// store links to nutrition/ingredient pages in map by item name
-	// TBD - parse each page to fill out response
-	var details = {};
-	var $ = cheerio.load(html);
-	$('li').each(function(index, element) {
-        $(this).find('a').each(function(index, element) {
-        	var name = $(this).text();
-        	var link = $(this).attr('href');
-        	details[name] = link;
-            //console.log($(this).text(), $(this).attr('href'));
-        });
-    });
-
-    var response = 
-    {
-        "Breakfast" : 
-        [
-            {
-                "name" : "Bruin Plate",
-                "menu" : []
-            },
-            {
-                "name" : "De Neve Dining",
-                "menu" : []
-            }
-        ],
-        "Lunch" : 
-        [
-            {
-                "name" : "Covel Dining",
-                "menu" : []
-            },
-            {
-                "name" : "Bruin Plate",
-                "menu" : []
-            },
-            {
-                "name" : "De Neve Dining",
-                "menu" : []
-            },
-            {
-                "name" : "FEAST at Rieber",
-                "menu" : []
-            }
-        ],
-        "Dinner" : 
-        [
-            {
-                "name" : "Covel Dining",
-                "menu" : []
-            },
-            {
-                "name" : "Bruin Plate",
-                "menu" : []
-            },
-            {
-                "name" : "De Neve Dining",
-                "menu" : []
-            },
-            {
-                "name" : "FEAST at Rieber",
-                "menu" : []
-            }
-        ]
-    };
-
-    var tablesAsJson = tabletojson.convert(html);
-
-    for (var i = 1; i <= 5; i++)
-    {
-        var mealname;
-        var nameMap;
-
-        if (i == 1)
-        {
-            mealname = "Breakfast";
-            nameMap = 
-            {
-                "Bruin Plate" : 0,
-                "De Neve Dining" : 1
-            }
-        }
-        else 
-        {
-            if (i == 2 || i == 3)
-                mealname = "Lunch";
-            else if (i == 4 || i == 5)
-                mealname = "Dinner";
-            nameMap = 
-            {
-                "Covel Dining" : 0,
-                "Bruin Plate" : 1,
-                "De Neve Dining" : 2,
-                "FEAST at Rieber" : 3
-            }
-        }
-
-        var table = tablesAsJson[i];
-        var offset = 0;
-
-        var name1;
-        var name2;
-
-        if (i == 3 || i == 5)
-        {
-            offset = 1;
-            name1 = table[0]['0'];
-            name2 = table[0]['1'];
-        }
-        else
-        {
-            name1 = table[1]['0'];
-            name2 = table[1]['1'];
-        }
-        for (var j = (3-offset); j < table.length; j++)
-        {
-            var obj1 = 
-            {
-                "section_name" : "",
-                "items" : []
-            };
-
-            var obj2 = 
-            {
-                "section_name" : "",
-                "items" : []
-            };
-
-            var section1 = table[j]['0'];
-            var arr1 = section1.replace(/\t/g, '').split('\n');
-            obj1.section_name = arr1[0];
-            arr1.shift();
-            obj1.items = arr1;
-            response[mealname][nameMap[name1]].menu.push(obj1);
-            
-            var section2 = table[j]['1'];
-            var arr2 = section2.replace(/\t/g, '').split('\n');
-            obj2.section_name = arr2[0];
-            arr2.shift();
-            obj2.items = arr2;
-            response[mealname][nameMap[name2]].menu.push(obj2);
-        }
-    }
-    // send the response object to the /menus page
-    res.send(response);
-}
-
 /* Parameters:
     Date (optional)
 */
@@ -404,14 +234,6 @@ app.get('/Cafe-1919', function (req, res) {
     
     var cf1919 = fs.readFileSync("1919.html")
     parse1919(res, cf1919)
-
-    // request(cafe1919Url, function(error, response, body) {
-    //     if (error) {
-    //         sendError(res, error)
-    //     } else {
-    //         parse1919(res, body)
-    //     }
-    // })
 })
 
 function parse1919(res, body) {
@@ -445,55 +267,17 @@ function parse1919Swiper(body, pos){
                     itemCodesArr[j] = itemCodes.eq(j).attr('alt')
                 }
                 itemInfo['itemCodes'] = itemCodesArr
+                // TODO: item cost 
+                var itemCost = slides.eq(i).find('.menu-item-price').text().trim()
+                // console.log(itemCost)
+                if (itemCost != '')
+                    itemInfo['itemCost'] = itemCost
+                else
+                    itemInfo['itemCost'] = "$0.00"
                 items[i] = itemInfo
             }
         }
     })
-    // $('.meal-detail-link').each(function(index, element){
-    //     var text = $(this).text().trim()
-    //     if (mealNumber == 0)
-    //         if (text.indexOf('Breakfast') == -1)
-    //             return
-    //     else if (mealNumber == 1)
-    //         if (text.indexOf('Lunch') == -1)
-    //             return
-    //     else if (mealNumber == 2)
-    //         if (text.indexOf('Dinner') == -1)
-    //             return
-
-    //     var currElem = $(this).next()
-    //     while (currElem.hasClass('menu-block')){
-    //         var name = currElem.find('h3')
-    //         var sections = {}
-    //         var sectionNames = currElem.find('.sect-item')
-    //         for (var h = 0; h < sectionNames.length; h++){
-    //             var sectionName = sectionNames.eq(h).text()
-    //             var match = sectionName.match(/(\r\n[A-Z \ta-z]+\r\n)/g)
-    //             var itemList = currElem.find('.menu-item')
-    //             var items = []
-    //             for (var i = 0; i < itemList.length; i++){
-    //                 var currItem = itemList.eq(i)
-    //                 var itemName = currItem.find('.recipelink').text().trim()
-                    // var itemRecipe = currItem.find('.recipelink').attr('href')
-
-    //                 var itemNames = {}
-    //                 var itemCodesArr = []
-    //                 itemNames['name'] = itemName
-    //                 itemNames['recipelink'] = itemRecipe
-    //                 var itemCodes = currItem.find('.tt-prodwebcode').find('img')
-    //                 for (var j = 0; j < itemCodes.length; j++){
-    //                     itemCodesArr[j] = itemCodes.eq(j).attr('alt')
-    //                 }
-    //                 itemNames['itemcodes'] = itemCodesArr
-    //                 items[i] = itemNames
-    //             }
-    //             sections[match[0].trim()] = items
-    //         }
-
-    //         result[name.text().trim()] = sections
-    //         currElem = currElem.next()    
-    //     }
-    // })    
 
     return items
 }
