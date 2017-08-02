@@ -14,11 +14,16 @@ var app = express()
     To test with local file:
     var html = fs.readFileSync("test.html");
     parseMenus(res, html);
+
+    Top of the HTML file MUST contain <!DOCTYPE html> in order to work!
 */
 
 let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
 let overviewUrl = 'http://menu.dining.ucla.edu/Menus/%s'
+let cafe1919Url = 'http://menu.dining.ucla.edu/Menus/Cafe1919'
 // hours testing URL: https://web.archive.org/web/20170509035312/http://menu.dining.ucla.edu/Hours
+// bcafe test URL:
+const bcafeUrl = 'http://web.archive.org/web/20170416221050/http://menu.dining.ucla.edu/Menus/BruinCafe';
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 // let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
@@ -77,7 +82,6 @@ app.get('/overview', function (req, res) {
 */
 app.get('/hours', function (req, res) {
     var dateString = getDate(req, res)
-    console.log(dateString)
     var url = util.format(hoursUrl, dateString)
     request(url, function(error, response, body) {
         if (error) {
@@ -86,29 +90,6 @@ app.get('/hours', function (req, res) {
             parseHours(res, body)
         }
     })
-})
-
-/* Parameters:
-    Date (optional)
-*/
-app.get('/menus', function (req, res) {
-	/*
-	var date = getDate(req, res)
-    var month = date.getMonth() + 1 //getMonth returns 0 based month
-    var day = date.getDate()
-    var year = date.getFullYear()
-    var url = util.format(overviewUrl, month, day, year)
-    request(url, function(error, response, body) {
-        if (error) {
-            sendError(res, error)
-        } else {
-            parseMenus(res, body)
-        }
-    })
-	*/
-    // temporary cache file since website is down
-    var html = fs.readFileSync("test.html");
-    parseMenus(res, html);
 })
 
 // app.get('/calendarYear', function(req, res){
@@ -127,8 +108,31 @@ app.get('/menus', function (req, res) {
 //     res.send('TODO');
 // })
 
+// Bruin Cafe
+app.get('/Bruin-Cafe', function (req, res) {
+    var bcafeHTML = fs.readFileSync('bcafe.html');
+    parseBruinCafe(res, bcafeHTML);
+    // request(bcafeUrl, function(error, response, body) {
+    //     if (error) {
+    //         sendError(res, error);
+    //     } else {
+    //         parseBruinCafe(res, body);
+    //     }
+    // });
+});
+
+function parseBruinCafe(res, body) {
+    var response = {};
+
+    var $ = cheerio.load(body);
+    $('.page-nav-button').each(function(index, element) {
+        response[$(this).text()] = {};
+    });
+
+    res.send(response);
+}
+
 function parseOverviewPage(res, body) {
-    var response = []
     var obj = {}
     
     //     var tag = $(this)
@@ -137,8 +141,7 @@ function parseOverviewPage(res, body) {
     obj['breakfast'] = parseMealPeriod(body, 0)
     obj['lunch'] = parseMealPeriod(body, 1)
     obj['dinner'] = parseMealPeriod(body, 2)
-    response.push(obj)
-    res.send(response)
+    res.send(obj)
 }
 
 function parseMealPeriod(body, mealNumber) {
@@ -224,157 +227,62 @@ function parseHours(res, body) {
     res.send(response)
 }
 
-function parseMenus(res, html)
-{
-	// store links to nutrition/ingredient pages in map by item name
-	// TBD - parse each page to fill out response
-	var details = {};
-	var $ = cheerio.load(html);
-	$('li').each(function(index, element) {
-        $(this).find('a').each(function(index, element) {
-        	var name = $(this).text();
-        	var link = $(this).attr('href');
-        	details[name] = link;
-            //console.log($(this).text(), $(this).attr('href'));
-        });
-    });
+// Cafe 1919 never changes, so it is parsed from a local file!
+app.get('/Cafe-1919', function (req, res) {
+    
+    var cf1919 = fs.readFileSync("1919.html")
+    parse1919(res, cf1919)
+})
 
-    var response = 
-    {
-        "Breakfast" : 
-        [
-            {
-                "name" : "Bruin Plate",
-                "menu" : []
-            },
-            {
-                "name" : "De Neve Dining",
-                "menu" : []
-            }
-        ],
-        "Lunch" : 
-        [
-            {
-                "name" : "Covel Dining",
-                "menu" : []
-            },
-            {
-                "name" : "Bruin Plate",
-                "menu" : []
-            },
-            {
-                "name" : "De Neve Dining",
-                "menu" : []
-            },
-            {
-                "name" : "FEAST at Rieber",
-                "menu" : []
-            }
-        ],
-        "Dinner" : 
-        [
-            {
-                "name" : "Covel Dining",
-                "menu" : []
-            },
-            {
-                "name" : "Bruin Plate",
-                "menu" : []
-            },
-            {
-                "name" : "De Neve Dining",
-                "menu" : []
-            },
-            {
-                "name" : "FEAST at Rieber",
-                "menu" : []
-            }
-        ]
-    };
+function parse1919(res, body) {
+    var obj = {}
 
-    var tablesAsJson = tabletojson.convert(html);
+    obj['breakfast'] = parse1919Swiper(body, 0)
+    obj['pizzette'] = parse1919Swiper(body, 1)
+    obj['panini'] = parse1919Swiper(body, 2)
+    obj['insalate'] = parse1919Swiper(body, 3)
+    obj['sides'] = parse1919Swiper(body, 4)
+    obj['bibite'] = parse1919Swiper(body, 5)
+    obj['dolci'] = parse1919Swiper(body, 6)
+    res.send(obj)
+}
 
-    for (var i = 1; i <= 5; i++)
-    {
-        var mealname;
-        var nameMap;
+function parse1919Swiper(body, pos){
+    var items = []
+    var $ = cheerio.load(body)
 
-        if (i == 1)
-        {
-            mealname = "Breakfast";
-            nameMap = 
-            {
-                "Bruin Plate" : 0,
-                "De Neve Dining" : 1
+    $('.swiper-slide').each(function(index, element){
+        if (index == pos){
+            var slides = $(this).find('.menu-item')
+            for (var i = 0; i < slides.length; i++){
+                var itemInfo = {}
+                itemInfo['name'] = slides.eq(i).find('.recipelink').text().trim()
+                itemInfo['recipelink'] = slides.eq(i).find('.recipelink').attr('href')
+                var itemDescript = slides.eq(i).find('.menu-item-description').text().trim()
+                if (itemDescript != '')
+                    itemInfo['itemDescription'] = itemDescript
+                else
+                    itemInfo['itemDescription'] = "No description provided"
+                var itemCodesArr = []
+                var itemCodes = slides.eq(i).find('.webcode')
+                for (var j = 0; j < itemCodes.length; j++){
+                    itemCodesArr[j] = itemCodes.eq(j).attr('alt')
+                }
+                itemInfo['itemCodes'] = itemCodesArr
+                var itemCost = slides.eq(i).find('.menu-item-price').text().trim()
+                if (itemCost != '')
+                    itemInfo['itemCost'] = itemCost
+                else
+                    itemInfo['itemCost'] = "$0.00"
+                items[i] = itemInfo
             }
         }
-        else 
-        {
-            if (i == 2 || i == 3)
-                mealname = "Lunch";
-            else if (i == 4 || i == 5)
-                mealname = "Dinner";
-            nameMap = 
-            {
-                "Covel Dining" : 0,
-                "Bruin Plate" : 1,
-                "De Neve Dining" : 2,
-                "FEAST at Rieber" : 3
-            }
-        }
+    })
 
-        var table = tablesAsJson[i];
-        var offset = 0;
-
-        var name1;
-        var name2;
-
-        if (i == 3 || i == 5)
-        {
-            offset = 1;
-            name1 = table[0]['0'];
-            name2 = table[0]['1'];
-        }
-        else
-        {
-            name1 = table[1]['0'];
-            name2 = table[1]['1'];
-        }
-        for (var j = (3-offset); j < table.length; j++)
-        {
-            var obj1 = 
-            {
-                "section_name" : "",
-                "items" : []
-            };
-
-            var obj2 = 
-            {
-                "section_name" : "",
-                "items" : []
-            };
-
-            var section1 = table[j]['0'];
-            var arr1 = section1.replace(/\t/g, '').split('\n');
-            obj1.section_name = arr1[0];
-            arr1.shift();
-            obj1.items = arr1;
-            response[mealname][nameMap[name1]].menu.push(obj1);
-            
-            var section2 = table[j]['1'];
-            var arr2 = section2.replace(/\t/g, '').split('\n');
-            obj2.section_name = arr2[0];
-            arr2.shift();
-            obj2.items = arr2;
-            response[mealname][nameMap[name2]].menu.push(obj2);
-        }
-    }
-    // send the response object to the /menus page
-    res.send(response);
+    return items
 }
 
 function sendError(res, error) {
-    //TODO: send JSON with the returned error message
     console.log(error)
     res.send(error)
 }
