@@ -227,9 +227,7 @@ function parseHours(res, body) {
     res.send(response)
 }
 
-/* Parameters:
-    Date (optional)
-*/
+// Cafe 1919 never changes, so it is parsed from a local file!
 app.get('/Cafe-1919', function (req, res) {
     
     var cf1919 = fs.readFileSync("1919.html")
@@ -256,20 +254,22 @@ function parse1919Swiper(body, pos){
     $('.swiper-slide').each(function(index, element){
         if (index == pos){
             var slides = $(this).find('.menu-item')
-            // console.log(slides.find('.recipelink').attr('href'))
             for (var i = 0; i < slides.length; i++){
                 var itemInfo = {}
                 itemInfo['name'] = slides.eq(i).find('.recipelink').text().trim()
                 itemInfo['recipelink'] = slides.eq(i).find('.recipelink').attr('href')
+                var itemDescript = slides.eq(i).find('.menu-item-description').text().trim()
+                if (itemDescript != '')
+                    itemInfo['itemDescription'] = itemDescript
+                else
+                    itemInfo['itemDescription'] = "No description provided"
                 var itemCodesArr = []
                 var itemCodes = slides.eq(i).find('.webcode')
                 for (var j = 0; j < itemCodes.length; j++){
                     itemCodesArr[j] = itemCodes.eq(j).attr('alt')
                 }
                 itemInfo['itemCodes'] = itemCodesArr
-                // TODO: item cost 
                 var itemCost = slides.eq(i).find('.menu-item-price').text().trim()
-                // console.log(itemCost)
                 if (itemCost != '')
                     itemInfo['itemCost'] = itemCost
                 else
