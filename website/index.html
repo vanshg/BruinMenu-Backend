@@ -64,18 +64,85 @@
   </textarea>
   </div>
 </div>
-<button onclick="myAccFunc('Demo2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Overview</button>
+<button onclick="myAccFunc('Demo2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Menu Overviews</button>
 <div id="Demo2" class="w3-hide">
-  <a href="#" class="w3-button w3-block w3-left-align">Link 1</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Link 2</a>
-  <a href="#" class="w3-button w3-block w3-left-align">Link 3</a>
+  <div class="w3-container">
+    <p>Get the overview menus for all the dining halls</p>
+    <p>Create a GET request with the following format: bruindining.herokuapp.com/overview?date=YYYY-MM-DD</p>
+    <p>If the date is not specified, the default date is set to today's date.</p>
+    <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed with your program of choice.</p>
+    <textarea name="Text1" cols="65" rows="66" style="background-color: ghostwhite">&#10;
+    {  
+     "breakfast":
+     {  
+        "Covel":
+        {  
+          "Exhibition Kitchen":
+          [  
+            {  
+               "name":"Cheese Omelet",
+               "recipelink":"http://menu.dining.ucla.edu/Recipes/061039/1",
+               "itemcodes":
+               [  
+                  "AMLK",
+                  "AEGG"
+               ]
+            }, 
+            {etc. other menu items}
+          ], 
+          {etc. other grill options}
+        }, 
+        {etc. other dining halls}
+      },
+    "lunch":
+    {  
+      "Covel":
+      {  
+         "Exhibition Kitchen":
+         [  
+           {  
+             "name":"Chicken Linguini Alfredo",
+             "recipelink":"http://menu.dining.ucla.edu/Recipes/306002/6",
+             "itemcodes":
+             [  
+                "AMLK",
+                "AWHT"
+             ]
+           },
+           {etc. other menu items}
+        ],
+        {etc. other grill options}
+      },
+      {etc. other dining halls}
+    },
+    "dinner":
+    {  
+      "Covel":
+      {  
+         "Exhibition Kitchen":
+         [  
+           {  
+             "name":"Beef Tri Tip",
+             "recipelink":"http://menu.dining.ucla.edu/Recipes/157026/3",
+             "itemcodes":
+             [  
+                "ASOY"
+             ]
+           },
+           {etc. other menu items}
+        ],
+        {etc. other grill options}
+      },
+      {etc. other dining halls}
+    }
+  }
+  </textarea>
+  </div>
 </div>
-<button onclick="myAccFunc('Demo3')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Cafe</button>
+<button onclick="myAccFunc('Demo3')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Cafe(s)</button>
 <div id="Demo3" class="w3-hide w3-black">
   <div class="w3-container">
-    <p>Accordion with Images:</p>
-    <img src="/w3images/fjords.jpg" style="width:30%;" class="w3-animate-zoom">
-    <p>Trolltunga, Norway</p>
+    
   </div>
 </div>
 </div>
@@ -87,7 +154,7 @@
 <footer class="w3-container w3-theme-dark w3-padding-16">
   <h3>Remarks:</h3>
   <p>Website powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  <p>Backend powered by Node.js, Express.js and Cheerio.js and hosted on Heroku.</p>
+  <p>Backend powered by Node.js and hosted on Heroku.</p>
   <p>Other projects by <a href="https://www.github.com/sahilmgandhi" target="_blank">Sahil</a>, <a href="https://www.github.com/vanshg" target="_blank">Vansh</a> and <a href="https://www.github.com/jzaturensky" target="_blank">Jonathan</a>.</p>
 </footer>
 
