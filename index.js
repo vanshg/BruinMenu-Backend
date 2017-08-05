@@ -123,12 +123,52 @@ app.get('/Bruin-Cafe', function (req, res) {
 
 function parseBruinCafe(res, body) {
     var response = {};
-
     var $ = cheerio.load(body);
     $('.page-nav-button').each(function(index, element) {
-        response[$(this).text()] = {};
+        response[$(this).text()] = [];
     });
 
+    $('.swiper-slide').each(function(index, element) {
+        //var obj = {};
+        //var blocks = $(this).find('h2');
+        //for (var b = 0; b < blocks.length; b++) {
+            var arr = [];
+            var items = $(this).find('.menu-item');
+            console.log(items.length);
+            for (var i = 0; i < items.length; i++) {
+                var itemInfo = {};
+                // name
+                itemInfo['name'] = items.eq(i).find('.recipelink').text().trim();
+                // recipelink
+                itemInfo['recipelink'] = items.eq(i).find('.recipelink').attr('href');
+                // description
+                var itemDescript = items.eq(i).find('.menu-item-description').text().trim();
+                if (itemDescript != '') 
+                    itemInfo['itemDescription'] = itemDescript;
+                else
+                    itemInfo['itemDescription'] = "No description provided";
+                // code
+                var itemCodesArr = []
+                var itemCodes = items.eq(i).find('.webcode');
+                for (var j = 0; j < itemCodes.length; j++){
+                    itemCodesArr[j] = itemCodes.eq(j).attr('alt');
+                }
+                itemInfo['itemCodes'] = itemCodesArr;
+                // cost
+                var itemCost = items.eq(i).find('.menu-item-price').text().trim();
+                if (itemCost != '')
+                    itemInfo['itemCost'] = itemCost;
+                else
+                    itemInfo['itemCost'] = "No cost provided";
+                arr.push(itemInfo);
+            }
+            //obj[blocks.eq(b).text()] = arr;
+        //}
+
+        response[Object.keys(response)[index]] = arr;
+    });
+
+    //console.dir(response, {depth: null});
     res.send(response);
 }
 
