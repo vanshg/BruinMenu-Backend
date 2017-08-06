@@ -21,9 +21,11 @@ var app = express()
 let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
 let overviewUrl = 'http://menu.dining.ucla.edu/Menus/%s'
 let cafe1919Url = 'http://menu.dining.ucla.edu/Menus/Cafe1919'
-// hours testing URL: https://web.archive.org/web/20170509035312/http://menu.dining.ucla.edu/Hours
-// bcafe test URL:
+
+// URLs to test during summer development when websites are changed
 const bcafeUrl = 'http://web.archive.org/web/20170416221050/http://menu.dining.ucla.edu/Menus/BruinCafe';
+const hedrickUrl = 'https://web.archive.org/web/20170616202351/http://menu.dining.ucla.edu/Menus/HedrickStudy'
+const deneveGrabUrl = 'https://web.archive.org/web/20170617043018/http://menu.dining.ucla.edu/Menus/DeNeveGrabNGo'
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 // let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
@@ -107,70 +109,6 @@ app.get('/hours', function (req, res) {
 //     })
 //     res.send('TODO');
 // })
-
-// Bruin Cafe
-app.get('/Bruin-Cafe', function (req, res) {
-    var bcafeHTML = fs.readFileSync('bcafe.html');
-    parseBruinCafe(res, bcafeHTML);
-    // request(bcafeUrl, function(error, response, body) {
-    //     if (error) {
-    //         sendError(res, error);
-    //     } else {
-    //         parseBruinCafe(res, body);
-    //     }
-    // });
-});
-
-function parseBruinCafe(res, body) {
-    var response = {};
-    var $ = cheerio.load(body);
-    $('.page-nav-button').each(function(index, element) {
-        response[$(this).text()] = [];
-    });
-
-    $('.swiper-slide').each(function(index, element) {
-        //var obj = {};
-        //var blocks = $(this).find('h2');
-        //for (var b = 0; b < blocks.length; b++) {
-            var arr = [];
-            var items = $(this).find('.menu-item');
-            console.log(items.length);
-            for (var i = 0; i < items.length; i++) {
-                var itemInfo = {};
-                // name
-                itemInfo['name'] = items.eq(i).find('.recipelink').text().trim();
-                // recipelink
-                itemInfo['recipelink'] = items.eq(i).find('.recipelink').attr('href');
-                // description
-                var itemDescript = items.eq(i).find('.menu-item-description').text().trim();
-                if (itemDescript != '') 
-                    itemInfo['itemDescription'] = itemDescript;
-                else
-                    itemInfo['itemDescription'] = "No description provided";
-                // code
-                var itemCodesArr = []
-                var itemCodes = items.eq(i).find('.webcode');
-                for (var j = 0; j < itemCodes.length; j++){
-                    itemCodesArr[j] = itemCodes.eq(j).attr('alt');
-                }
-                itemInfo['itemCodes'] = itemCodesArr;
-                // cost
-                var itemCost = items.eq(i).find('.menu-item-price').text().trim();
-                if (itemCost != '')
-                    itemInfo['itemCost'] = itemCost;
-                else
-                    itemInfo['itemCost'] = "No cost provided";
-                arr.push(itemInfo);
-            }
-            //obj[blocks.eq(b).text()] = arr;
-        //}
-
-        response[Object.keys(response)[index]] = arr;
-    });
-
-    //console.dir(response, {depth: null});
-    res.send(response);
-}
 
 function parseOverviewPage(res, body) {
     var obj = {}
@@ -267,59 +205,66 @@ function parseHours(res, body) {
     res.send(response)
 }
 
+// Hedrick Study
+app.get('/Hedrick-Study', function (req, res){
+    var hedrickStudy = fs.readFileSync("hedrickstudy.html")
+    parseCafe(res, hedrickStudy)
+})
+
 // Cafe 1919 never changes, so it is parsed from a local file!
 app.get('/Cafe-1919', function (req, res) {
     
     var cf1919 = fs.readFileSync("1919.html")
-    parse1919(res, cf1919)
+    parseCafe(res, cf1919)
 })
 
-function parse1919(res, body) {
-    var obj = {}
+// Bruin Cafe
+app.get('/Bruin-Cafe', function (req, res) {
+    var bcafeHTML = fs.readFileSync('bcafe.html');
+    parseCafe(res, bcafeHTML);
+});
 
-    obj['breakfast'] = parse1919Swiper(body, 0)
-    obj['pizzette'] = parse1919Swiper(body, 1)
-    obj['panini'] = parse1919Swiper(body, 2)
-    obj['insalate'] = parse1919Swiper(body, 3)
-    obj['sides'] = parse1919Swiper(body, 4)
-    obj['bibite'] = parse1919Swiper(body, 5)
-    obj['dolci'] = parse1919Swiper(body, 6)
-    res.send(obj)
-}
+function parseCafe(res, body) {
+    var response = {};
+    var $ = cheerio.load(body);
+    $('.page-nav-button').each(function(index, element) {
+        response[$(this).text()] = [];
+    });
 
-function parse1919Swiper(body, pos){
-    var items = []
-    var $ = cheerio.load(body)
-
-    $('.swiper-slide').each(function(index, element){
-        if (index == pos){
-            var slides = $(this).find('.menu-item')
-            for (var i = 0; i < slides.length; i++){
-                var itemInfo = {}
-                itemInfo['name'] = slides.eq(i).find('.recipelink').text().trim()
-                itemInfo['recipelink'] = slides.eq(i).find('.recipelink').attr('href')
-                var itemDescript = slides.eq(i).find('.menu-item-description').text().trim()
-                if (itemDescript != '')
-                    itemInfo['itemDescription'] = itemDescript
-                else
-                    itemInfo['itemDescription'] = "No description provided"
-                var itemCodesArr = []
-                var itemCodes = slides.eq(i).find('.webcode')
-                for (var j = 0; j < itemCodes.length; j++){
-                    itemCodesArr[j] = itemCodes.eq(j).attr('alt')
-                }
-                itemInfo['itemCodes'] = itemCodesArr
-                var itemCost = slides.eq(i).find('.menu-item-price').text().trim()
-                if (itemCost != '')
-                    itemInfo['itemCost'] = itemCost
-                else
-                    itemInfo['itemCost'] = "$0.00"
-                items[i] = itemInfo
+    $('.swiper-slide').each(function(index, element) {
+        var arr = [];
+        var items = $(this).find('.menu-item');
+        for (var i = 0; i < items.length; i++) {
+            var itemInfo = {};
+            // name
+            itemInfo['name'] = items.eq(i).find('.recipelink').text().trim();
+            // recipelink
+            itemInfo['recipelink'] = items.eq(i).find('.recipelink').attr('href');
+            // description
+            var itemDescript = items.eq(i).find('.menu-item-description').text().trim();
+            if (itemDescript != '') 
+                itemInfo['itemDescription'] = itemDescript;
+            else
+                itemInfo['itemDescription'] = "No description provided";
+            // web-code
+            var itemCodesArr = []
+            var itemCodes = items.eq(i).find('.webcode');
+            for (var j = 0; j < itemCodes.length; j++){
+                itemCodesArr[j] = itemCodes.eq(j).attr('alt');
             }
+            itemInfo['itemCodes'] = itemCodesArr;
+            // cost
+            var itemCost = items.eq(i).find('.menu-item-price').text().trim();
+            if (itemCost != '')
+                itemInfo['itemCost'] = itemCost;
+            else
+                itemInfo['itemCost'] = "No cost provided";
+            arr.push(itemInfo);
         }
-    })
+    response[Object.keys(response)[index]] = arr;
+    });
 
-    return items
+    res.send(response);
 }
 
 function sendError(res, error) {
