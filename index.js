@@ -205,6 +205,12 @@ function parseHours(res, body) {
     res.send(response)
 }
 
+// De Neve Grab N Go
+app.get('/DeNeve-GrabNGo', function (req,res){
+    var deNeveGrab = fs.readFileSync("denevegrabngo.html")
+    parseCafe(res, deNeveGrab)  
+})
+
 // Hedrick Study
 app.get('/Hedrick-Study', function (req, res){
     var hedrickStudy = fs.readFileSync("hedrickstudy.html")
