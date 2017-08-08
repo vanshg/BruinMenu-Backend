@@ -12,7 +12,7 @@ var app = express()
     If date is specified: Year-Month-Day (such as 2017-06-23 for June 23, 2017)
 
     To test with local file:
-    var html = fs.readFileSync("test.html");
+    var html = fs.readFileSync("html/test.html");
     parseMenus(res, html);
 
     Top of the HTML file MUST contain <!DOCTYPE html> in order to work!
@@ -209,38 +209,38 @@ function parseHours(res, body) {
 
 // De Neve Grab N Go
 app.get('/DeNeve-GrabNGo', function (req,res){
-    var deNeveGrab = fs.readFileSync("denevegrabngo.html")
+    var deNeveGrab = fs.readFileSync("html/denevegrabngo.html")
     parseCafe(res, deNeveGrab)  
 })
 
 // Hedrick Study
 app.get('/Hedrick-Study', function (req, res){
-    var hedrickStudy = fs.readFileSync("hedrickstudy.html")
+    var hedrickStudy = fs.readFileSync("html/hedrickstudy.html")
     parseCafe(res, hedrickStudy)
 })
 
 // Cafe 1919 never changes, so it is parsed from a local file!
 app.get('/Cafe-1919', function (req, res) {
     
-    var cf1919 = fs.readFileSync("1919.html")
+    var cf1919 = fs.readFileSync("html/1919.html")
     parseCafe(res, cf1919)
 })
 
 // Bruin Cafe
 app.get('/Bruin-Cafe', function (req, res) {
-    var bcafeHTML = fs.readFileSync('bcafe.html');
+    var bcafeHTML = fs.readFileSync("html/bcafe.html");
     parseCafe(res, bcafeHTML);
 });
 
 // Bruin Plate Grab N Go Breakfast
 app.get('/BruinPlate-GrabNGoBreakfast', function (req, res) {
-    var bplateGrab = fs.readFileSync('bplategrabngobreakfast.html');
+    var bplateGrab = fs.readFileSync("html/bplategrabngobreakfast.html");
     parseCafe(res, bplateGrab);
 });
 
 // De Neve Late Night
 app.get('/DeNeve-LateNight', function (req, res) {
-    var deNeveLate = fs.readFileSync('denevelatenight.html');
+    var deNeveLate = fs.readFileSync("html/denevelatenight.html");
     parseCafe(res, deNeveLate);
 });
 
