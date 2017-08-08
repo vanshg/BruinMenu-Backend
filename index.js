@@ -24,8 +24,10 @@ let cafe1919Url = 'http://menu.dining.ucla.edu/Menus/Cafe1919'
 
 // URLs to test during summer development when websites are changed
 const bcafeUrl = 'http://web.archive.org/web/20170416221050/http://menu.dining.ucla.edu/Menus/BruinCafe';
-const hedrickUrl = 'https://web.archive.org/web/20170616202351/http://menu.dining.ucla.edu/Menus/HedrickStudy'
-const deneveGrabUrl = 'https://web.archive.org/web/20170617043018/http://menu.dining.ucla.edu/Menus/DeNeveGrabNGo'
+const hedrickUrl = 'https://web.archive.org/web/20170616202351/http://menu.dining.ucla.edu/Menus/HedrickStudy';
+const deneveGrabUrl = 'https://web.archive.org/web/20170617043018/http://menu.dining.ucla.edu/Menus/DeNeveGrabNGo';
+const bplateGrabUrl = 'https://web.archive.org/web/20170616210053/http://menu.dining.ucla.edu/Menus/BruinPlateGrabNGoBreakfast';
+const deneveLateUrl = 'https://web.archive.org/web/20170617043009/http://menu.dining.ucla.edu/Menus/DeNeveLateNight';
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
 // let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
@@ -228,6 +230,18 @@ app.get('/Cafe-1919', function (req, res) {
 app.get('/Bruin-Cafe', function (req, res) {
     var bcafeHTML = fs.readFileSync('bcafe.html');
     parseCafe(res, bcafeHTML);
+});
+
+// Bruin Plate Grab N Go Breakfast
+app.get('/BruinPlate-GrabNGoBreakfast', function (req, res) {
+    var bplateGrab = fs.readFileSync('bplategrabngobreakfast.html');
+    parseCafe(res, bplateGrab);
+});
+
+// De Neve Late Night
+app.get('/DeNeve-LateNight', function (req, res) {
+    var deNeveLate = fs.readFileSync('denevelatenight.html');
+    parseCafe(res, deNeveLate);
 });
 
 function parseCafe(res, body) {
