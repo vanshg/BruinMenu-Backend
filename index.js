@@ -207,44 +207,69 @@ function parseHours(res, body) {
     res.send(response)
 }
 
+app.get('/cafes', function (req, res){
+    var deNeveGrabHTML = fs.readFileSync("html/denevegrabngo.html")
+    var hedrickStudyHTML = fs.readFileSync("html/hedrickstudy.html")
+    var cf1919HTML = fs.readFileSync("html/1919.html")
+    var bcafeHTML = fs.readFileSync("html/bcafe.html")
+    var bplateGrabHTML = fs.readFileSync("html/bplategrabngobreakfast.html")
+    var deNeveLateHTML = fs.readFileSync("html/denevelatenight.html")
+
+    var resp = {}
+    resp['Cafe-1919'] = parseCafe(cf1919HTML)
+    resp['DeNeve-GrabNGo'] = parseCafe(deNeveGrabHTML)
+    resp['DeNeve-LateNight'] = parseCafe(deNeveLateHTML)
+    resp['Bruin-Cafe'] = parseCafe(bcafeHTML)
+    resp['BruinPlate-GrabNGoBreakfast'] = parseCafe(bplateGrabHTML)
+    resp['Hedrick-Study'] = parseCafe(hedrickStudyHTML)
+
+    res.send(resp)
+})
+
 // De Neve Grab N Go
 app.get('/DeNeve-GrabNGo', function (req,res){
-    var deNeveGrab = fs.readFileSync("html/denevegrabngo.html")
-    parseCafe(res, deNeveGrab)  
+    var deNeveGrabHTML = fs.readFileSync("html/denevegrabngo.html")
+    var resp = parseCafe(deNeveGrabHTML)
+    res.send(resp)  
 })
 
 // Hedrick Study
 app.get('/Hedrick-Study', function (req, res){
-    var hedrickStudy = fs.readFileSync("html/hedrickstudy.html")
-    parseCafe(res, hedrickStudy)
+    var hedrickStudyHTML = fs.readFileSync("html/hedrickstudy.html")
+    var resp = parseCafe(hedrickStudyHTML)
+    res.send(resp)
 })
 
 // Cafe 1919 never changes, so it is parsed from a local file!
 app.get('/Cafe-1919', function (req, res) {
     
-    var cf1919 = fs.readFileSync("html/1919.html")
-    parseCafe(res, cf1919)
+    var cf1919HTML = fs.readFileSync("html/1919.html")
+    var resp = parseCafe(cf1919HTML)
+    res.send(resp)
 })
 
 // Bruin Cafe
 app.get('/Bruin-Cafe', function (req, res) {
     var bcafeHTML = fs.readFileSync("html/bcafe.html");
-    parseCafe(res, bcafeHTML);
+    var resp = parseCafe(bcafeHTML)
+    res.send(resp)
 });
 
 // Bruin Plate Grab N Go Breakfast
 app.get('/BruinPlate-GrabNGoBreakfast', function (req, res) {
-    var bplateGrab = fs.readFileSync("html/bplategrabngobreakfast.html");
-    parseCafe(res, bplateGrab);
+    var bplateGrabHTML = fs.readFileSync("html/bplategrabngobreakfast.html");
+    var resp = parseCafe(bplateGrabHTML)
+    res.send(resp)
 });
 
 // De Neve Late Night
 app.get('/DeNeve-LateNight', function (req, res) {
-    var deNeveLate = fs.readFileSync("html/denevelatenight.html");
-    parseCafe(res, deNeveLate);
+    var deNeveLateHTML = fs.readFileSync("html/denevelatenight.html");
+    var resp = parseCafe(deNeveLateHTML)
+    res.send(resp)
 });
 
-function parseCafe(res, body) {
+function parseCafe(body) {
     var response = {};
     var $ = cheerio.load(body);
     $('.page-nav-button').each(function(index, element) {
@@ -283,8 +308,8 @@ function parseCafe(res, body) {
         }
     response[Object.keys(response)[index]] = arr;
     });
-
-    res.send(response);
+ 
+    return response
 }
 
 function sendError(res, error) {
