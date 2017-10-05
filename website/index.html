@@ -3,51 +3,62 @@
 <title>Bruin Dining: Backend</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+  crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="icon" href="favicon.jpg" />
+
+<!-- Favicons generated from https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="manifest.json">
+<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
 <body>
 
-<!-- Side Navigation -->
-<nav class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-center" style="display:none" id="mySidebar">
-  <h1 class="w3-xxxlarge w3-text-theme">Quick Links</h1>
-  <button class="w3-bar-item w3-button" onclick="w3_close()">Back to the main menu</button>
-  <a href="http://bruindining.herokuapp.com/overview" class="w3-bar-item w3-button">Overview</a>
-  <a href="http://bruindining.herokuapp.com/hours" class="w3-bar-item w3-button">Hours</a>
-  <a href="http://bruindining.herokuapp.com/cafes" class="w3-bar-item w3-button">Cafes</a>
-  <a href="http://bruindining.herokuapp.com/Cafe-1919" class="w3-bar-item w3-button">Cafe 1919</a>
-  <a href="http://bruindining.herokuapp.com/DeNeve-GrabNGo" class="w3-bar-item w3-button">De Neve GrabNGo</a>
-  <a href="http://bruindining.herokuapp.com/DeNeve-LateNight" class="w3-bar-item w3-button">De Neve Late Night</a>
-  <a href="http://bruindining.herokuapp.com/Hedrick-Study" class="w3-bar-item w3-button">Hedrick Study</a>
-  <a href="http://bruindining.herokuapp.com/Bruin-Cafe" class="w3-bar-item w3-button">Bruin Cafe</a>
-  <a href="http://bruindining.herokuapp.com/BruinPlate-GrabNGoBreakfast" class="w3-bar-item w3-button">Bruin Plate GrabNGo Breakfast</a>
-  <a href="http://bruindining.herokuapp.com/Rendezvous" class="w3-bar-item w3-button">Rendezvous</a>
-</nav>
+  <!-- Side Navigation -->
+  <nav class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 class="w3-xxxlarge w3-text-theme">Quick Links</h1>
+    <button class="w3-bar-item w3-button" onclick="w3_close()">Back to the main menu</button>
+    <a href="http://bruindining.herokuapp.com/overview" class="w3-bar-item w3-button">Overview</a>
+    <a href="http://bruindining.herokuapp.com/hours" class="w3-bar-item w3-button">Hours</a>
+    <a href="http://bruindining.herokuapp.com/cafes" class="w3-bar-item w3-button">Cafes</a>
+    <a href="http://bruindining.herokuapp.com/Cafe-1919" class="w3-bar-item w3-button">Cafe 1919</a>
+    <a href="http://bruindining.herokuapp.com/DeNeve-GrabNGo" class="w3-bar-item w3-button">De Neve GrabNGo</a>
+    <a href="http://bruindining.herokuapp.com/DeNeve-LateNight" class="w3-bar-item w3-button">De Neve Late Night</a>
+    <a href="http://bruindining.herokuapp.com/Hedrick-Study" class="w3-bar-item w3-button">Hedrick Study</a>
+    <a href="http://bruindining.herokuapp.com/Bruin-Cafe" class="w3-bar-item w3-button">Bruin Cafe</a>
+    <a href="http://bruindining.herokuapp.com/BruinPlate-GrabNGoBreakfast" class="w3-bar-item w3-button">Bruin Plate GrabNGo Breakfast</a>
+    <a href="http://bruindining.herokuapp.com/Rendezvous" class="w3-bar-item w3-button">Rendezvous</a>
+  </nav>
 
-<!-- Header -->
-<header class="w3-container w3-theme w3-padding" id="myHeader">
-  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i> 
-  <div class="w3-center">
-  <h4>Welcome to the backend for Bruin Dining.</h4>
-   </div>
-</header>
+  <!-- Header -->
+  <header class="w3-container w3-theme w3-padding" id="myHeader">
+    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+    <div class="w3-center">
+      <h4>Welcome to the backend for Bruin Dining.</h4>
+    </div>
+  </header>
 
-<div class="w3-container w3-center">
+  <div class="w3-container w3-center">
+    <hr>
+    <h3>What can this backend do?</h3>
+    <p>Below are certain examples of endpoints that are available to be used. Using these endpoints, third party developers
+      can build webapps, mobile apps, or even provide statistical information on the type/quality/diversity of the food offered
+      at UCLA. </p>
+  </div>
+
   <hr>
-  <h3>What can this backend do?</h3>
-  <p>Below are certain examples of endpoints that are available to be used. Using these endpoints, third party developers can build webapps, mobile apps, or even provide statistical information on the type/quality/diversity of the food offered at UCLA. </p>
-</div>
-
-<hr>
-<button onclick="myAccFunc('Demo1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Hours</button>
-<div id="Demo1" class="w3-hide">
-  <div class="w3-container">
-  <p>Get the hours for the dining halls and cafes.</p>
-  <p>Create a GET request with the following format: bruindining.herokuapp.com/hours?date=YYYY-MM-DD</p>
-  <p>If the date is not specified, the default date is set to today's date.</p>
-  <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed with your program of choice.</p>
-  <textarea name="Text1" cols="40" rows="25" style="background-color: ghostwhite">&#10;
+  <button onclick="myAccFunc('Demo1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Hours</button>
+  <div id="Demo1" class="w3-hide">
+    <div class="w3-container">
+      <p>Get the hours for the dining halls and cafes.</p>
+      <p>Create a GET request with the following format: bruindining.herokuapp.com/hours?date=YYYY-MM-DD</p>
+      <p>If the date is not specified, the default date is set to today's date.</p>
+      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
+        can then be parsed or pretty-printed with your program of choice.</p>
+      <textarea name="Text1" cols="40" rows="25" style="background-color: ghostwhite">&#10;
   	[
 	  {
 	    "hall_name": "Covel",
@@ -72,16 +83,17 @@
 	  }
 	]
   </textarea>
+    </div>
   </div>
-</div>
-<button onclick="myAccFunc('Demo2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Menu Overviews</button>
-<div id="Demo2" class="w3-hide">
-  <div class="w3-container">
-    <p>Get the overview menus for all the dining halls</p>
-    <p>Create a GET request with the following format: bruindining.herokuapp.com/overview?date=YYYY-MM-DD</p>
-    <p>If the date is not specified, the default date is set to today's date.</p>
-    <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed with your program of choice.</p>
-    <textarea name="Text1" cols="65" rows="66" style="background-color: ghostwhite">&#10;
+  <button onclick="myAccFunc('Demo2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Menu Overviews</button>
+  <div id="Demo2" class="w3-hide">
+    <div class="w3-container">
+      <p>Get the overview menus for all the dining halls</p>
+      <p>Create a GET request with the following format: bruindining.herokuapp.com/overview?date=YYYY-MM-DD</p>
+      <p>If the date is not specified, the default date is set to today's date.</p>
+      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
+        can then be parsed or pretty-printed with your program of choice.</p>
+      <textarea name="Text1" cols="65" rows="66" style="background-color: ghostwhite">&#10;
     {  
      "breakfast":
      {  
@@ -147,16 +159,17 @@
     }
   }
   </textarea>
+    </div>
   </div>
-</div>
-<button onclick="myAccFunc('Demo3')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Cafes</button>
-<div id="Demo3" class="w3-hide">
-  <div class="w3-container">
-    <p>Get the overview menus for all the cafes</p>
-    <p>Create a GET request with the following format: bruindining.herokuapp.com/cafes</p>
-    <p>No date is needed to be specified as the menu does not change on a daily basis.</p>
-    <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed with your program of choice.</p>
-    <textarea name="Text1" cols="160" rows="46" style="background-color: ghostwhite">&#10;
+  <button onclick="myAccFunc('Demo3')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Cafes</button>
+  <div id="Demo3" class="w3-hide">
+    <div class="w3-container">
+      <p>Get the overview menus for all the cafes</p>
+      <p>Create a GET request with the following format: bruindining.herokuapp.com/cafes</p>
+      <p>No date is needed to be specified as the menu does not change on a daily basis.</p>
+      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
+        can then be parsed or pretty-printed with your program of choice.</p>
+      <textarea name="Text1" cols="160" rows="46" style="background-color: ghostwhite">&#10;
       {  
        "Cafe-1919":{  
           "Breakfast":[  
@@ -202,17 +215,19 @@
       }
         
     </textarea>
+    </div>
   </div>
-</div>
-<button onclick="myAccFunc('Demo4')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Individual Cafes</button>
-<div id="Demo4" class="w3-hide">
-  <div class="w3-container">
-    <p>Get the menu for individual cafes</p>
-    <p>Create a GET request with the following format: bruindining.herokuapp.com/[CAFE_NAME]</p>
-    <p>No date is needed to be specified as the menu does not change on a daily basis.</p>
-    <p>The different possible values for CAFE_NAME are: DeNeve-GrabNGo, Hedrick-Study, Cafe-1919, Bruin-Cafe, BruinPlate-GrabNGoBreakfast, DeNeve-LateNight, and Rendezvous.</p>
-    <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed with your program of choice.</p>
-    <textarea name="Text1" cols="160" rows="33" style="background-color: ghostwhite">&#10;
+  <button onclick="myAccFunc('Demo4')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Individual Cafes</button>
+  <div id="Demo4" class="w3-hide">
+    <div class="w3-container">
+      <p>Get the menu for individual cafes</p>
+      <p>Create a GET request with the following format: bruindining.herokuapp.com/[CAFE_NAME]</p>
+      <p>No date is needed to be specified as the menu does not change on a daily basis.</p>
+      <p>The different possible values for CAFE_NAME are: DeNeve-GrabNGo, Hedrick-Study, Cafe-1919, Bruin-Cafe, BruinPlate-GrabNGoBreakfast,
+        DeNeve-LateNight, and Rendezvous.</p>
+      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
+        can then be parsed or pretty-printed with your program of choice.</p>
+      <textarea name="Text1" cols="160" rows="33" style="background-color: ghostwhite">&#10;
       The following is a snippet from the Rendezvous endpoint:
       {  
        "Friday Specials":[  
@@ -242,47 +257,49 @@
         [etc other meal subgroups]
       }
     </textarea>
+    </div>
   </div>
-</div>
-</div>
+  </div>
 
-<div class="w3-container w3-center">
-  <hr>
-</div>
-<!-- Footer -->
-<footer class="w3-container w3-theme-dark w3-padding-16">
-  <h3>Remarks:</h3>
-  <p>Website powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-  <p>Backend powered by Node.js and hosted on Heroku.</p>
-  <p>Other projects by <a href="https://www.github.com/sahilmgandhi" target="_blank">Sahil</a>, <a href="https://www.github.com/vanshg" target="_blank">Vansh</a> and <a href="https://www.github.com/jzaturensky" target="_blank">Jonathan</a>.</p>
-  <p>If you would like to contribute to the code, or would like other endpoints/features, you can check out the repo for the backend <a href="https://github.com/vanshg/BruinMenu-Backend" target="_blank">here</a>.
-</footer>
+  <div class="w3-container w3-center">
+    <hr>
+  </div>
+  <!-- Footer -->
+  <footer class="w3-container w3-theme-dark w3-padding-16">
+    <h3>Remarks:</h3>
+    <p>Website powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    <p>Backend powered by Node.js and hosted on Heroku.</p>
+    <p>Other projects by <a href="https://www.github.com/sahilmgandhi" target="_blank">Sahil</a>, <a href="https://www.github.com/vanshg"
+        target="_blank">Vansh</a> and <a href="https://www.github.com/jzaturensky" target="_blank">Jonathan</a>.</p>
+    <p>If you would like to contribute to the code, or would like other endpoints/features, you can check out the repo for the
+      backend <a href="https://github.com/vanshg/BruinMenu-Backend" target="_blank">here</a>.
+  </footer>
 
-<!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
-<script>
-// Side navigation
-function w3_open() {
-    var x = document.getElementById("mySidebar");
-    x.style.width = "100%";
-    x.style.fontSize = "40px";
-    x.style.paddingTop = "10%";
-    x.style.display = "block";
-}
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-}
-
-// Accordions
-function myAccFunc(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
+  <!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
+  <script>
+    // Side navigation
+    function w3_open() {
+      var x = document.getElementById("mySidebar");
+      x.style.width = "100%";
+      x.style.fontSize = "40px";
+      x.style.paddingTop = "10%";
+      x.style.display = "block";
     }
-}
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
 
-</script>
+    // Accordions
+    function myAccFunc(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+  </script>
 
 </body>
+
 </html>
