@@ -6,6 +6,9 @@ var util = require('util')
 var cheerio = require('cheerio')
 var tabletojson = require('tabletojson');
 var fs = require('fs');
+var apicache = require('apicache');
+
+var cache = apicache.middleware;
 var app = express()
 
 /* 
@@ -61,6 +64,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(express.static('website'))
 app.use(express.static(__dirname + '/images'));
+
+// Cache all routes. By default, the cache TTL is one hour
+app.use(cache())
 // Spin up the server
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
