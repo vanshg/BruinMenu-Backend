@@ -64,6 +64,9 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(express.static('website'))
 app.use(express.static(__dirname + '/images'));
+
+// Cache all routes. By default, the cache TTL is one hour
+app.use(cache())
 // Spin up the server
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
@@ -77,7 +80,7 @@ app.get('/',function(req,res){
 /* Parameters:
     Date (optional)
 */
-app.get('/overview', cache('5 minutes'), function (req, res) {
+app.get('/overview', function (req, res) {
     var dateString = getDate(req, res)
 
     var url = util.format(overviewUrl, dateString)
