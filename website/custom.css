@@ -1,0 +1,54 @@
+/* For extra CSS outside of core Bootstrap. */
+
+/* Space content so header and footer do not cover it */
+body>.container {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+/* Add spacing between body items items */
+.container>.row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#accordian>.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-block {
+    padding: 20px;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.display-4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Footer adjustments */
+footer {
+    height: 50px;
+}
+
+footer>.container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+footer a {
+    color: white;
+}
+
+/* Code tag adjustments */
+pre {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    background: rgb(239, 240, 241);
+}

@@ -1,114 +1,134 @@
 <!DOCTYPE html>
-<html>
-<title>Bruin Dining: Backend</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-  crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<!-- Favicons generated from https://realfavicongenerator.net/ -->
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="manifest" href="manifest.json">
-<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-<meta name="theme-color" content="#ffffff">
+<html>
+
+<head>
+  <title>Bruin Dining: Backend</title>
+  <meta name="description" content="Backend for Bruin Dining">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicons generated from https://realfavicongenerator.net/ -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Bootstrap v4.0.0-beta Core CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+
+  <!-- Font Awesome v4.7.0 -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous">
+
+  <!-- Any extra CSS -->
+  <link href="custom.css" rel="stylesheet">
+</head>
 
 <body>
 
-  <!-- Side Navigation -->
-  <nav class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-center" style="display:none" id="mySidebar">
-    <h1 class="w3-xxxlarge w3-text-theme">Quick Links</h1>
-    <button class="w3-bar-item w3-button" onclick="w3_close()">Back to the main menu</button>
-    <a href="http://bruindining.herokuapp.com/overview" class="w3-bar-item w3-button">Overview</a>
-    <a href="http://bruindining.herokuapp.com/hours" class="w3-bar-item w3-button">Hours</a>
-    <a href="http://bruindining.herokuapp.com/cafes" class="w3-bar-item w3-button">Cafes</a>
-    <a href="http://bruindining.herokuapp.com/Cafe-1919" class="w3-bar-item w3-button">Cafe 1919</a>
-    <a href="http://bruindining.herokuapp.com/DeNeve-GrabNGo" class="w3-bar-item w3-button">De Neve GrabNGo</a>
-    <a href="http://bruindining.herokuapp.com/DeNeve-LateNight" class="w3-bar-item w3-button">De Neve Late Night</a>
-    <a href="http://bruindining.herokuapp.com/Hedrick-Study" class="w3-bar-item w3-button">Hedrick Study</a>
-    <a href="http://bruindining.herokuapp.com/Bruin-Cafe" class="w3-bar-item w3-button">Bruin Cafe</a>
-    <a href="http://bruindining.herokuapp.com/BruinPlate-GrabNGoBreakfast" class="w3-bar-item w3-button">Bruin Plate GrabNGo Breakfast</a>
-    <a href="http://bruindining.herokuapp.com/Rendezvous" class="w3-bar-item w3-button">Rendezvous</a>
+  <!-- Navigation -->
+  <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand" href="index.html">Bruin Dining: Backend</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+      aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://bruindining.herokuapp.com/overview" target="_blank">Overview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://bruindining.herokuapp.com/hours" target="_blank">Hours</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://bruindining.herokuapp.com/cafes" target="_blank">Cafes</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            role="button">
+                Individual Cafes
+            </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" data-toggle="dropdown">
+            <li><a href="http://bruindining.herokuapp.com/Cafe-1919">Cafe 1919</a></li>
+            <li><a href="http://bruindining.herokuapp.com/DeNeve-GrabNGo">De Neve GrabNGo</a></li>
+            <li><a href="http://bruindining.herokuapp.com/DeNeve-LateNight">De Neve Late Night</a></li>
+            <li><a href="http://bruindining.herokuapp.com/Hedrick-Study">Hedrick Study</a></li>
+            <li><a href="http://bruindining.herokuapp.com/Bruin-Cafe">Bruin Cafe</a></li>
+            <li><a href="http://bruindining.herokuapp.com/BruinPlate-GrabNGoBreakfast">Bruin Plate GrabNGo Breakfast</a></li>
+            <li><a href="http://bruindining.herokuapp.com/Rendezvous">Rendezvous</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </nav>
 
-  <!-- Header -->
-  <header class="w3-container w3-theme w3-padding" id="myHeader">
-    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
-    <div class="w3-center">
-      <h4>Welcome to the backend for Bruin Dining.</h4>
-    </div>
-  </header>
+  <!-- Page Content -->
+  <div class="container">
 
-  <div class="w3-container w3-center">
-    <hr>
-    <h3>What can this backend do?</h3>
-    <p>Below are certain examples of endpoints that are available to be used. Using these endpoints, third party developers
-      can build webapps, mobile apps, or even provide statistical information on the type/quality/diversity of the food offered
-      at UCLA. </p>
-  </div>
+    <!-- Page Heading -->
+    <h1 class="page-header display-4">Welcome to the backend for Bruin Dining.</h1>
+    <!-- Subtitle, if we have one in the future
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis urna odio, at convallis ipsum egestas eu.
+      In consectetur egestas tellus, a eleifend massa maximus et. Ut convallis aliquam odio a vehicula. Vivamus ut ex rutrum,
+      rhoncus velit sit amet, lobortis mauris. Maecenas in libero velit. Proin eu tincidunt eros, a tincidunt risus. Aenean
+      mollis auctor urna, vel ullamcorper dolor porta nec.</p>
+    -->
 
-  <hr>
-  <button onclick="myAccFunc('Demo1')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Hours</button>
-  <div id="Demo1" class="w3-hide">
-    <div class="w3-container">
-      <p>Get the hours for the dining halls and cafes.</p>
-      <p>Create a GET request with the following format: bruindining.herokuapp.com/hours?date=YYYY-MM-DD</p>
-      <p>If the date is not specified, the default date is set to today's date.</p>
-      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
-        can then be parsed or pretty-printed with your program of choice.</p>
-      <textarea name="Text1" cols="40" rows="25" style="background-color: ghostwhite">&#10;
-  	[
-	  {
-	    "hall_name": "Covel",
-	    "breakfast": "7:00 am - 9:00 am",
-	    "lunch": "11:00 am - 2:00 pm",
-	    "dinner": "5:00 pm - 8:00 pm",
-	    "late_night": "CLOSED"
-	  },
-	  {
-	    "hall_name": "Café 1919",
-	    "breakfast": "7:00 am - 11:00 am",
-	    "lunch": "11:00 am - 2:00 pm",
-	    "dinner": "CLOSED",
-	    "late_night": "CLOSED"
-	  },
-	  {
-	    "hall_name": "Rendezvous",
-	    "breakfast": "7:00 am - 10:30 am",
-	    "lunch": "11:00 am - 4:30 pm",
-	    "dinner": "5:00 pm - 9:00 pm",
-	    "late_night": "CLOSED"
-	  }
-	]
-  </textarea>
-    </div>
-  </div>
-  <button onclick="myAccFunc('Demo2')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Menu Overviews</button>
-  <div id="Demo2" class="w3-hide">
-    <div class="w3-container">
-      <p>Get the overview menus for all the dining halls</p>
-      <p>Create a GET request with the following format: bruindining.herokuapp.com/overview?date=YYYY-MM-DD</p>
-      <p>If the date is not specified, the default date is set to today's date.</p>
-      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
-        can then be parsed or pretty-printed with your program of choice.</p>
-      <textarea name="Text1" cols="65" rows="66" style="background-color: ghostwhite">&#10;
+    <!-- FAQ style accordion -->
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="card">
+        <div class="card-header" role="tab" id="headingOne">
+          <h5 class="mb-0">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              What can this backend do?
+            </a>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="card-block">
+            Below are certain examples of endpoints that are available to be used. Using these endpoints, third party developers can
+            build webapps, mobile apps, or even provide statistical information on the type/quality/diversity of the food
+            offered at UCLA.
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" role="tab" id="headingTwo">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              GET Menu Overviews
+            </a>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="card-block">Get the overview menus for all the dining halls. Create a GET request with the following format: <strong>bruindining.herokuapp.com/overview?date=YYYY-MM-DD</strong>.
+            If the date is not specified, the default date is set to today's date. The following shows an example of the
+            output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed
+            with your program of choice.
+            <pre class="pre-scrollable"><code>
+  {  
+    "breakfast":
     {  
-     "breakfast":
-     {  
         "Covel":
         {  
           "Exhibition Kitchen":
           [  
             {  
-               "name":"Cheese Omelet",
-               "recipelink":"http://menu.dining.ucla.edu/Recipes/061039/1",
-               "itemcodes":
-               [  
+              "name":"Cheese Omelet",
+              "recipelink":"http://menu.dining.ucla.edu/Recipes/061039/1",
+              "itemcodes":
+              [  
                   "AMLK",
                   "AEGG"
-               ]
+              ]
             }, 
             {etc. other menu items}
           ], 
@@ -120,18 +140,18 @@
     {  
       "Covel":
       {  
-         "Exhibition Kitchen":
-         [  
-           {  
-             "name":"Chicken Linguini Alfredo",
-             "recipelink":"http://menu.dining.ucla.edu/Recipes/306002/6",
-             "itemcodes":
-             [  
+        "Exhibition Kitchen":
+        [  
+          {  
+            "name":"Chicken Linguini Alfredo",
+            "recipelink":"http://menu.dining.ucla.edu/Recipes/306002/6",
+            "itemcodes":
+            [  
                 "AMLK",
                 "AWHT"
-             ]
-           },
-           {etc. other menu items}
+            ]
+          },
+          {etc. other menu items}
         ],
         {etc. other grill options}
       },
@@ -141,163 +161,223 @@
     {  
       "Covel":
       {  
-         "Exhibition Kitchen":
-         [  
-           {  
-             "name":"Beef Tri Tip",
-             "recipelink":"http://menu.dining.ucla.edu/Recipes/157026/3",
-             "itemcodes":
-             [  
+        "Exhibition Kitchen":
+        [  
+          {  
+            "name":"Beef Tri Tip",
+            "recipelink":"http://menu.dining.ucla.edu/Recipes/157026/3",
+            "itemcodes":
+            [  
                 "ASOY"
-             ]
-           },
-           {etc. other menu items}
+            ]
+          },
+          {etc. other menu items}
         ],
         {etc. other grill options}
       },
       {etc. other dining halls}
     }
   }
-  </textarea>
-    </div>
-  </div>
-  <button onclick="myAccFunc('Demo3')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Cafes</button>
-  <div id="Demo3" class="w3-hide">
-    <div class="w3-container">
-      <p>Get the overview menus for all the cafes</p>
-      <p>Create a GET request with the following format: bruindining.herokuapp.com/cafes</p>
-      <p>No date is needed to be specified as the menu does not change on a daily basis.</p>
-      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
-        can then be parsed or pretty-printed with your program of choice.</p>
-      <textarea name="Text1" cols="160" rows="46" style="background-color: ghostwhite">&#10;
-      {  
-       "Cafe-1919":{  
-          "Breakfast":[  
-             {  
-                "name":"Breakfast Calzone w/ Bacon",
-                "recipelink":"http://menu.dining.ucla.edu/Recipes/141233/1",
-                "itemDescription":"Bacon, Eggs, Spinach, Shredded Mozzarella, Asiago & Parmesan Cheese, and Diced Tomatoes wrapped in our Pizza Dough, baked to perfection.",
-                "itemCodes":[  
-                   "AMLK",
-                   "AEGG",
-                   "AWHT"
-                ],
-                "itemCost":"$4.75"
-             },
-             {  
-                "name":"Breakfast Calzone w/ Prosciutto",
-                "recipelink":"http://menu.dining.ucla.edu/Recipes/141057/1",
-                "itemDescription":"Prosciutto, Eggs, Spinach, Shredded Mozzarella, Asiago & Parmesan Cheese, and Diced Tomatoes wrapped in our Pizza Dough, baked to perfection",
-                "itemCodes":[  
-                   "AMLK",
-                   "AEGG",
-                   "AWHT"
-                ],
-                "itemCost":"$4.75"
-             },
-             {  
-                "name":"Breakfast Calzone, Vegetarian",
-                "recipelink":"http://menu.dining.ucla.edu/Recipes/141198/1",
-                "itemDescription":"Eggs, Spinach, Shredded Mozzarella, Asiago & Parmesan Cheese, and Diced Tomatoes wrapped in our Pizza Dough, baked to perfection.",
-                "itemCodes":[  
-                   "V",
-                   "AMLK",
-                   "AEGG",
-                   "AWHT"
-                ],
-                "itemCost":"$4.75"
-             },
-             {etc other items for this meal subgroup}
-          ],
-          [etc other meal subgroups for this cafe]
-        },
-        {etc other cafes like Rendezvous and more}
-      }
-        
-    </textarea>
-    </div>
-  </div>
-  <button onclick="myAccFunc('Demo4')" class="w3-padding-16 w3-theme w3-button w3-block w3-left-align">GET Individual Cafes</button>
-  <div id="Demo4" class="w3-hide">
-    <div class="w3-container">
-      <p>Get the menu for individual cafes</p>
-      <p>Create a GET request with the following format: bruindining.herokuapp.com/[CAFE_NAME]</p>
-      <p>No date is needed to be specified as the menu does not change on a daily basis.</p>
-      <p>The different possible values for CAFE_NAME are: DeNeve-GrabNGo, Hedrick-Study, Cafe-1919, Bruin-Cafe, BruinPlate-GrabNGoBreakfast,
-        DeNeve-LateNight, and Rendezvous.</p>
-      <p>The following shows an example of the output one would expect from making this GET request. The returned JSON object
-        can then be parsed or pretty-printed with your program of choice.</p>
-      <textarea name="Text1" cols="160" rows="33" style="background-color: ghostwhite">&#10;
-      The following is a snippet from the Rendezvous endpoint:
-      {  
-       "Friday Specials":[  
+            </code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" role="tab" id="headingThree">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              GET Hours
+            </a>
+          </h5>
+        </div>
+        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="card-block">Create a GET request with the following format: <strong>bruindining.herokuapp.com/hours?date=YYYY-MM-DD</strong>.
+            If the date is not specified, the default date is set to today's date. The following shows an example of the
+            output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed
+            with your program of choice.
+            <pre class="pre-scrollable"><code>
+  [
+    {
+      "hall_name": "Covel",
+      "breakfast": "7:00 am - 9:00 am",
+      "lunch": "11:00 am - 2:00 pm",
+      "dinner": "5:00 pm - 8:00 pm",
+      "late_night": "CLOSED"
+    },
+    {
+      "hall_name": "Café 1919",
+      "breakfast": "7:00 am - 11:00 am",
+      "lunch": "11:00 am - 2:00 pm",
+      "dinner": "CLOSED",
+      "late_night": "CLOSED"
+    },
+    {
+      "hall_name": "Rendezvous",
+      "breakfast": "7:00 am - 10:30 am",
+      "lunch": "11:00 am - 4:30 pm",
+      "dinner": "5:00 pm - 9:00 pm",
+      "late_night": "CLOSED"
+    }
+  ]
+            </code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" role="tab" id="headingFour">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            GET Cafes
+          </a>
+          </h5>
+        </div>
+        <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+          <div class="card-block">
+            Get the overview menus for all the cafes. Create a GET request with the following format: <strong>bruindining.herokuapp.com/cafes</strong>.
+            No date is needed to be specified as the menu does not change on a daily basis. The following shows an example
+            of the output one would expect from making this GET request. The returned JSON object can then be parsed or pretty-printed
+            with your program of choice.
+            <pre class="pre-scrollable"><code>
+  {  
+    "Cafe-1919":{  
+        "Breakfast":[  
           {  
-             "name":"Chicken Enchiladas",
-             "recipelink":"http://menu.dining.ucla.edu/Recipes/111274/2",
-             "itemDescription":"Two Corn Tortillas rolled up with seasoned Stewed Chicken, topped with Guajillo Chili Sauce, Cheddar & Monterey Jack Cheeses, shredded Iceberg Lettuce, Sour Cream, and a Tomato Wedge. Served with Mexican Rice and Refried Beans.",
-             "itemCodes":[  
+              "name":"Breakfast Calzone w/ Bacon",
+              "recipelink":"http://menu.dining.ucla.edu/Recipes/141233/1",
+              "itemDescription":"Bacon, Eggs, Spinach, Shredded Mozzarella, Asiago & Parmesan Cheese, and Diced Tomatoes wrapped in our Pizza Dough, baked to perfection.",
+              "itemCodes":[  
                 "AMLK",
+                "AEGG",
                 "AWHT"
-             ],
-             "itemCost":"$7.75"
+              ],
+              "itemCost":"$4.75"
           },
           {  
-             "name":"Potato Enchiladas",
-             "recipelink":"http://menu.dining.ucla.edu/Recipes/140559/2",
-             "itemDescription":"Two Corn Tortillas rolled up with seasoned Potatoes, topped with Guajillo Chili Sauce, Cheddar & Monterey Jack Cheeses, shredded Iceberg Lettuce, Sour Cream, and a Tomato Wedge. Served with Mexican Rice and Refried Beans.",
-             "itemCodes":[  
+              "name":"Breakfast Calzone w/ Prosciutto",
+              "recipelink":"http://menu.dining.ucla.edu/Recipes/141057/1",
+              "itemDescription":"Prosciutto, Eggs, Spinach, Shredded Mozzarella, Asiago & Parmesan Cheese, and Diced Tomatoes wrapped in our Pizza Dough, baked to perfection",
+              "itemCodes":[  
+                "AMLK",
+                "AEGG",
+                "AWHT"
+              ],
+              "itemCost":"$4.75"
+          },
+          {  
+              "name":"Breakfast Calzone, Vegetarian",
+              "recipelink":"http://menu.dining.ucla.edu/Recipes/141198/1",
+              "itemDescription":"Eggs, Spinach, Shredded Mozzarella, Asiago & Parmesan Cheese, and Diced Tomatoes wrapped in our Pizza Dough, baked to perfection.",
+              "itemCodes":[  
                 "V",
                 "AMLK",
+                "AEGG",
                 "AWHT"
-             ],
-             "itemCost":"$7.25"
+              ],
+              "itemCost":"$4.75"
           },
-          {etc other items for Friday Specials}
+          {etc other items for this meal subgroup}
         ],
-        [etc other meal subgroups]
-      }
-    </textarea>
+        [etc other meal subgroups for this cafe]
+      },
+      {etc other cafes like Rendezvous and more}
+    }
+          </code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" role="tab" id="headingFive">
+          <h5 class="mb-0">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          GET Individual Cafes
+        </a>
+          </h5>
+        </div>
+        <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+          <div class="card-block">
+            Get the menu for individual cafes. Create a GET request with the following format: <strong>bruindining.herokuapp.com/[CAFE_NAME]</strong>.
+            No date is needed to be specified as the menu does not change on a daily basis. The different possible values
+            for CAFE_NAME are: <strong>DeNeve-GrabNGo</strong>, <strong>Hedrick-Study</strong>, <strong>Cafe-1919</strong>,
+            <strong>Bruin-Cafe</strong>,
+            <strong>BruinPlate-GrabNGoBreakfast</strong>, <strong>DeNeve-LateNight</strong>, and <strong>Rendezvous</strong>.
+            The following shows an example of the output one would expect from making this GET request (the following is
+            a snippet from the Rendezvous endpoint). The returned JSON object can then be parsed or pretty-printed with your
+            program of choice.
+            <pre class="pre-scrollable"><code>
+  {  
+    "Friday Specials":[  
+      {  
+          "name":"Chicken Enchiladas",
+          "recipelink":"http://menu.dining.ucla.edu/Recipes/111274/2",
+          "itemDescription":"Two Corn Tortillas rolled up with seasoned Stewed Chicken, topped with Guajillo Chili Sauce, Cheddar & Monterey Jack Cheeses, shredded Iceberg Lettuce, Sour Cream, and a Tomato Wedge. Served with Mexican Rice and Refried Beans.",
+          "itemCodes":[  
+            "AMLK",
+            "AWHT"
+          ],
+          "itemCost":"$7.75"
+      },
+      {  
+          "name":"Potato Enchiladas",
+          "recipelink":"http://menu.dining.ucla.edu/Recipes/140559/2",
+          "itemDescription":"Two Corn Tortillas rolled up with seasoned Potatoes, topped with Guajillo Chili Sauce, Cheddar & Monterey Jack Cheeses, shredded Iceberg Lettuce, Sour Cream, and a Tomato Wedge. Served with Mexican Rice and Refried Beans.",
+          "itemCodes":[  
+            "V",
+            "AMLK",
+            "AWHT"
+          ],
+          "itemCost":"$7.25"
+      },
+      {etc other items for Friday Specials}
+    ],
+    [etc other meal subgroups]
+  }
+        </code></pre>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
 
-  <div class="w3-container w3-center">
-    <hr>
+    <!-- Remarks -->
+    <h3>Remarks</h3>
+    <p>Backend powered by Node.js and hosted on Heroku.<br /> Frontend by Ardis Lu :^)<br /> Other projects by
+      <a href="https://www.github.com/jzaturensky" target="_blank">Jonathan</a>, <a href="https://www.github.com/sahilmgandhi"
+        target="_blank">Sahil</a>, and <a href="https://www.github.com/vanshg" target="_blank">Vansh</a>.<br /> If you would
+      like to contribute to the code, or would like other endpoints/features, you can check out the repo for the backend
+      <a href="https://github.com/vanshg/BruinMenu-Backend" target="_blank">here</a>.</p>
+
   </div>
+  <!-- /.container -->
+
   <!-- Footer -->
-  <footer class="w3-container w3-theme-dark w3-padding-16">
-    <h3>Remarks:</h3>
-    <p>Website powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-    <p>Backend powered by Node.js and hosted on Heroku.</p>
-    <p>Other projects by <a href="https://www.github.com/sahilmgandhi" target="_blank">Sahil</a>, <a href="https://www.github.com/vanshg"
-        target="_blank">Vansh</a> and <a href="https://www.github.com/jzaturensky" target="_blank">Jonathan</a>.</p>
-    <p>If you would like to contribute to the code, or would like other endpoints/features, you can check out the repo for the
-      backend <a href="https://github.com/vanshg/BruinMenu-Backend" target="_blank">here</a>.
+  <footer class="fixed-bottom bg-primary">
+    <div class="container">
+      <div class="text-center center-block">
+        <p class="m-0 text-center text-white">2017 • Ardis, Jonathan, Sahil, Vansh</p>
+      </div>
+    </div>
+    <!-- /.container -->
   </footer>
 
-  <!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
-  <script>
-    // Side navigation
-    function w3_open() {
-      var x = document.getElementById("mySidebar");
-      x.style.width = "100%";
-      x.style.fontSize = "40px";
-      x.style.paddingTop = "10%";
-      x.style.display = "block";
-    }
-    function w3_close() {
-      document.getElementById("mySidebar").style.display = "none";
-    }
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+    crossorigin="anonymous"></script>
 
-    // Accordions
-    function myAccFunc(id) {
-      var x = document.getElementById(id);
-      if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-      } else {
-        x.className = x.className.replace(" w3-show", "");
-      }
-    }
+  <!-- Quick fix for dropdown menu not working -->
+  <script>
+    $(function () {
+      $(".nav-link.dropdown-toggle").click(function () {
+        $(".dropdown-menu").toggle();
+        $(".dropdown-menu a").click(function () {
+          event.preventDefault();
+          event.stopPropagation();
+          window.open(this.href, '_blank');
+        });
+      });
+    });
   </script>
 
 </body>
