@@ -6,6 +6,9 @@ var util = require('util')
 var cheerio = require('cheerio')
 var tabletojson = require('tabletojson');
 var fs = require('fs');
+var apicache = require('apicache');
+
+var cache = apicache.middleware;
 var app = express()
 
 /* 
@@ -74,7 +77,7 @@ app.get('/',function(req,res){
 /* Parameters:
     Date (optional)
 */
-app.get('/overview', function (req, res) {
+app.get('/overview', cache('5 minutes'), function (req, res) {
     var dateString = getDate(req, res)
 
     var url = util.format(overviewUrl, dateString)
