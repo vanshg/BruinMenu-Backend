@@ -22,7 +22,7 @@ let hoursUrl = 'http://menu.dining.ucla.edu/Hours/%s' // yyyy-mm-dd
 let overviewUrl = 'http://menu.dining.ucla.edu/Menus/%s'
 let cafe1919Url = 'http://menu.dining.ucla.edu/Menus/Cafe1919'
 
-// URLs to test during summer development when websites are changed
+// URLs to test during summer development when websites are change
 // const bcafeUrl = 'http://web.archive.org/web/20170416221050/http://menu.dining.ucla.edu/Menus/BruinCafe';
 // const hedrickUrl = 'https://web.archive.org/web/20170616202351/http://menu.dining.ucla.edu/Menus/HedrickStudy';
 // const deneveGrabUrl = 'https://web.archive.org/web/20170617043018/http://menu.dining.ucla.edu/Menus/DeNeveGrabNGo';
@@ -36,7 +36,7 @@ let cafe1919Url = 'http://menu.dining.ucla.edu/Menus/Cafe1919'
 // const rendezHTML = 'http://menu.dining.ucla.edu/Menus/Rendezvous'
 
 //TODO: this url has changed let overviewUrl = 'http://menu.ha.ucla.edu/foodpro/default.asp?date=%d%%2F%d%%2F%d'
-// let calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
+// const calendarUrl = 'http://www.registrar.ucla.edu/Calendars/Annual-Academic-Calendar'
 
 let hallTitlesHours = [
     'Covel',
