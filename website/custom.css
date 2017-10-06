@@ -52,3 +52,12 @@ pre {
     white-space: pre-wrap;
     background: rgb(239, 240, 241);
 }
+
+/* Form spacing adjustments */
+label {
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+}
+.input-append .dropdown-menu {
+    margin-bottom: 4rem;
+}

@@ -24,6 +24,9 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
     crossorigin="anonymous">
 
+  <!-- Datepicker v1.6.4 -->
+  <link href="bootstrap-datepicker3.min.css" rel="stylesheet">
+
   <!-- Any extra CSS -->
   <link href="custom.css" rel="stylesheet">
 </head>
@@ -337,6 +340,65 @@
       </div>
     </div>
 
+    <!-- Quick form links -->
+    <h3>Quick links</h3>
+    <label for="basic-url">GET Menu Overview</label>
+    <div class="input-group">
+      <!-- Static label -->
+      <span class="input-group-addon">http://bruindining.herokuapp.com/overview?date=</span>
+      <!-- Date input -->
+      <input id="overviewDate" type="text" class="form-control date" data-provide="datepicker-inline" aria-describedby="basic-addon3">
+      <!-- Copy button -->
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" onclick="copyToClipboard('#overviewDate', 'http://bruindining.herokuapp.com/overview?date=')">Copy</button>
+      </span>
+    </div>
+    <label for="basic-url">GET Hours</label>
+    <div class="input-group">
+      <!-- Static label -->
+      <span class="input-group-addon">http://bruindining.herokuapp.com/hours?date=</span>
+      <!-- Date input -->
+      <input id="hoursDate" type="text" class="form-control date" data-provide="datepicker-inline" aria-describedby="basic-addon3">
+      <!-- Copy button -->
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" onclick="copyToClipboard('#hoursDate', 'http://bruindining.herokuapp.com/hours?date=')">Copy</button>
+      </span>
+    </div>
+    <label for="basic-url">GET Cafes</label>
+    <div class="input-group">
+      <!-- Static label -->
+      <span class="input-group-addon">http://bruindining.herokuapp.com/cafes</span>
+      <!-- Copy button -->
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" onclick="copyToClipboard('', 'http://bruindining.herokuapp.com/cafes')">Copy</button>
+      </span>
+    </div>
+    <label for="basic-url">GET Individual Cafes</label>
+    <div class="input-group">
+      <!-- Static label -->
+      <span class="input-group-addon">http://bruindining.herokuapp.com/</span>
+      <!-- Dropdown selector -->
+      <div class="input-append btn-group">
+        <input id="individualSelector" class="span2" id="appendedInputButton" size="16" type="text">
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="caret"></span>
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">DeNeve-GrabNGo</a>
+          <a class="dropdown-item" href="#">Hedrick-Study</a>
+          <a class="dropdown-item" href="#">Cafe-1919</a>
+          <a class="dropdown-item" href="#">Bruin-Cafe</a>
+          <a class="dropdown-item" href="#">BruinPlate-GrabNGoBreakfast</a>
+          <a class="dropdown-item" href="#">DeNeve-LateNight</a>
+          <a class="dropdown-item" href="#">Rendezvous</a>
+        </div>
+      </div>
+      <!-- Copy button -->
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" onclick="copyToClipboard('#individualSelector', 'http://bruindining.herokuapp.com/')">Copy</button>
+      </span>
+    </div>
+
     <!-- Remarks -->
     <h3>Remarks</h3>
     <p>Backend powered by Node.js and hosted on Heroku.<br /> Frontend by Ardis Lu :^)<br /> Other projects by
@@ -366,18 +428,55 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
     crossorigin="anonymous"></script>
 
-  <!-- Quick fix for dropdown menu not working -->
+  <!-- Datepicker v1.6.4 -->
+  <script src="bootstrap-datepicker.min.js"></script>
+
+  <!-- Quick fix for nav dropdown menu not working -->
   <script>
     $(function () {
       $(".nav-link.dropdown-toggle").click(function () {
-        $(".dropdown-menu").toggle();
-        $(".dropdown-menu a").click(function () {
+        $(".nav-item .dropdown-menu").toggle();
+        $(".nav-item .dropdown-menu a").click(function () {
           event.preventDefault();
           event.stopPropagation();
           window.open(this.href, '_blank');
         });
       });
     });
+  </script>
+
+  <!-- Quick fix for form dropdown menu not working -->
+  <script>
+    $(function () {
+      $(".input-append .dropdown-toggle").click(function () {
+        $(".input-append .dropdown-menu").toggle();
+      });
+      $(".input-append .dropdown-menu a").click(function () {
+        event.preventDefault();
+        event.stopPropagation();
+        $(".input-append input").val($(this).text());
+      });
+    });
+  </script>
+
+  <!-- Copy to clipboard functionality -->
+  <script>
+    function copyToClipboard(element, extra = "") {
+      if (!element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val(extra).select();
+        document.execCommand("copy");
+        $temp.remove();
+      }
+      else {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val(extra + $(element).val()).select();
+        document.execCommand("copy");
+        $temp.remove();
+      }
+    }
   </script>
 
 </body>
