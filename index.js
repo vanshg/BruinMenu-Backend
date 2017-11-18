@@ -161,7 +161,7 @@ function parseMealPeriod(body, mealNumber) {
             for (var h = 0; h < sectionNames.length; h++){
                 var sectionName = sectionNames.eq(h).text()
                 var match = sectionName.match(/(\r\n[A-Z \ta-z]+\r\n)/g)
-                var itemList = currElem.find('.menu-item')
+                var itemList = sectionNames.eq(h).find('.menu-item')
                 var items = []
                 for (var i = 0; i < itemList.length; i++){
                     var currItem = itemList.eq(i)
